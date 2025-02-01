@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/MarkdownPostLayout.astro
 title: The biggest problem with CI/CD pipelines
 date: '2025-01-07T12:30:00.000+10:30'
 #image: /assets

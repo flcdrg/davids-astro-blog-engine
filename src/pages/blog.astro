@@ -2,7 +2,7 @@
 import BlogPost from '../components/BlogPost.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "My learning blog";
-const allPosts = Object.values(import.meta.glob('./posts/**/*.md', { eager: true }));
+const allPosts = Object.values(import.meta.glob('./**/*.md', { eager: true }));
 
 function getExcerpt(content: string, length: number) {
     var excerptParagraphs = [];
@@ -26,6 +26,7 @@ function getExcerpt(content: string, length: number) {
     <ul>
         {allPosts.map(async (post: any) => 
             <div>
+                {post.date}
             <BlogPost url={post.url} title={post.frontmatter.title} /> 
 
             {getExcerpt(await post.compiledContent() as string, 200)}
