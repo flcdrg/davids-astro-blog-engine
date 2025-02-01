@@ -2,12 +2,35 @@
 import BlogPost from '../components/BlogPost.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "My learning blog";
-const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+const allPosts = Object.values(import.meta.glob('./posts/**/*.md', { eager: true }));
+
+function getExcerpt(content: string, length: number) {
+    var excerptParagraphs = [];
+        var currentLength = 0;
+        var paragraphs = content.match(/<p>.*?<\/p>/gs) || [];
+        for (var _i = 0, paragraphs_1 = paragraphs; _i < paragraphs_1.length; _i++) {
+            var paragraph = paragraphs_1[_i];
+            // Strip HTML from the paragraph
+            var text = paragraph.replace(/(<([^>]+)>)/gi, "");
+            if (currentLength > 0 && currentLength + text.length > length) {
+                break;
+            }
+            excerptParagraphs.push(text);
+            currentLength += text.length;
+        }
+        return excerptParagraphs.join(" ") + `\u2026`;
+}
 ---
 <BaseLayout pageTitle={pageTitle}>
     <p>This is where I will post about my journey learning Astro.</p>
     <ul>
-        {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} /> )}
+        {allPosts.map(async (post: any) => 
+            <div>
+            <BlogPost url={post.url} title={post.frontmatter.title} /> 
+
+            {getExcerpt(await post.compiledContent() as string, 200)}
+            </div>
+            )}
       </ul>
 </BaseLayout>
 
