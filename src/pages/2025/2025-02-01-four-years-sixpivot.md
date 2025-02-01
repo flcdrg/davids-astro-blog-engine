@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/MarkdownPostLayout.astro
 title: 4 years at SixPivot
 date: '2025-02-01T10:30:00.000+10:30'
 image: /assets/2024/02/sixpivot-logo.png

@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/MarkdownPostLayout.astro
 title: Blog engine thoughts
 date: '2025-01-24T16:00:00.000+10:30'
 tags:
