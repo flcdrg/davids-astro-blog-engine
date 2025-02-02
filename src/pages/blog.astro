@@ -1,10 +1,10 @@
 ---
-import { undefined } from 'astro:schema';
 import BlogPost from '../components/BlogPost.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "My learning blog";
 const allPosts = Object.values(import.meta.glob('./**/*.md', { eager: true }))
-    .sort((a: any, b: any) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+    .sort((a: any, b: any) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf())
+    .slice(0, 5);
 
 function getExcerpt(content: string, length: number) {
     var excerptParagraphs = [];
@@ -23,10 +23,9 @@ function getExcerpt(content: string, length: number) {
         return excerptParagraphs.join(" ") + `\u2026`;
 }
 
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 ---
 <BaseLayout pageTitle={pageTitle}>
-    <p>This is where I will post about my journey learning Astro.</p>
+    <p>Recent posts:</p>
     <ul>
         {allPosts.map(async (post: any) => 
             <div>
