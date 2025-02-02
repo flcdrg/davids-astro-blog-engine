@@ -56,9 +56,9 @@ const MonthMap: Record<string, string> = {
                               new Date(a.data.date).getTime() / 1000
                             )
                         )
-                        .map(({ data /*, slug */ }) => (
+                        .map(({ id, data /*, slug */ }) => (
                         //   <Card href={`/posts/${slug}`} frontmatter={data} />
-                        <li>{data.title} {data.canonicalURL}</li>
+                        <li><a href={`/${id}/`}>{data.title}</a></li>
                         ))}
                     </ul>
                   </div>

@@ -2,10 +2,18 @@
 import BaseLayout from './BaseLayout.astro';
 const { frontmatter, compiledContent } = Astro.props;
 
+// https://stackoverflow.com/a/76508946/25702
+const locale = 'en-AU',
+      suffixMap = { one: 'st', two: 'nd', few: 'rd', other: 'th' },
+      pluralRule = new Intl.PluralRules(locale, { type: 'ordinal', }),
+      withOrdinal = (n:number) => `${n}${suffixMap[pluralRule.select(n) as keyof typeof suffixMap]}`,
+      dateFmt = Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }),
+      formatDate = (date: Date) => `${withOrdinal(date.getDate())} ${dateFmt.format(date)}`;
+
 ---
 <BaseLayout pageTitle={frontmatter.title}>
 
-<p>{frontmatter.date.toString().slice(0,10)}</p>
+<p>{formatDate(frontmatter.date)}</p>
 <p><em>{frontmatter.description}</em></p>
 
 <div class="tags">
