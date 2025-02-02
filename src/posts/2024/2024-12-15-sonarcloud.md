@@ -1,7 +1,7 @@
 ---
 title: .NET Code Coverage in Azure DevOps and SonarCloud
 date: '2024-12-15T22:00:00.000+10:30'
-image: /assets/2020/05/azure-pipelines-logo.png
+image: ../../assets/2020/05/azure-pipelines-logo.png
 tags:
 - Azure DevOps
 - Azure Pipelines

@@ -3,7 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 import BlogPostExcerpt from '../components/BlogPostExcerpt.astro';
-const pageTitle = "Home Page";
+import { Image } from 'astro:assets';
+import { getImage } from "astro:assets";
+import CustomImage from '../components/CustomImage.astro';
+const pageTitle = "David Gardiner";
 
 const allPosts = (await getCollection("blog"))
   .sort(
@@ -11,21 +14,42 @@ const allPosts = (await getCollection("blog"))
       new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
   )
   .slice(0, 5);
+
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <h2>My awesome blog subtitle</h2>
+  <h2>A blog of software development, .NET and other interesting things
+    About
+    </h2>
 
   <p>Recent posts:</p>
-  <ul>
+
+  <ul class="list-none">
     {
       allPosts.map(async (post) => (
         <div>
-          {new Date(post.data.date).toLocaleDateString("en-AU", {
+          <h3><BlogPost url={`/${post.id}/`} title={post.data.title} /></h3>
+
+          {/* {JSON.stringify(post.data.date)} */}
+
+          <p><time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString("en-AU", {
             year: "numeric",
             month: "long",
             day: "numeric",
-          })}
-          <BlogPost url={`/${post.id}/`} title={post.data.title} />
+          })}</time></p>
+
+
+          {/* <Image src={post.data.image!} /> */}
+          { post.data.image &&
+          <CustomImage desktopImgUrl={post.data.image!} alt={post.data.imageAlt} />
+          }
+          
+          {/* <img src={post.data.image} alt={post.data.title} /> */}
+          {/* <img src={post.data
+          {post.data.image}
+
+          {/* <img style='height: 100%; width: 100%; object-fit: contain' src={post.data.image} alt={post.data.title} /> */}
+
+
 
           <BlogPostExcerpt body={post.body} length={200} />
         </div>
@@ -33,3 +57,12 @@ const allPosts = (await getCollection("blog"))
     }
   </ul>
 </BaseLayout>
+
+<style>
+
+  .list-none {
+    list-style-type: none;
+  }
+
+  
+</style>

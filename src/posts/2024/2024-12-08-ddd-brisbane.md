@@ -1,7 +1,7 @@
 ---
 title: DDD Brisbane 2024
 date: '2024-12-08T22:00:00.000+10:30'
-image: /assets/2024/12/ddd-bne-logo.png
+image: ../../assets/2024/12/ddd-bne-logo.png
 tags:
 - Conferences
 - Talks

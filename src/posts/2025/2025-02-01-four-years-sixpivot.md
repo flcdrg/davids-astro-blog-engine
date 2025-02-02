@@ -1,14 +1,15 @@
 ---
 title: 4 years at SixPivot
 date: '2025-02-01T10:30:00.000+10:30'
-image: /assets/2024/02/sixpivot-logo.png
+image: ../../assets/2024/02/sixpivot-logo.png
+imageAlt: SixPivot logo
 tags:
 - Work
 ---
 
 Another year has passed, and today I clock up 4 years at [SixPivot](https://www.sixpivot.com.au)!
 
-![SixPivot logo](/assets/2024/02/sixpivot-logo.png)
+![SixPivot logo](../../assets/2024/02/sixpivot-logo.png)
 
 Looking back at [last year's post]({% post_url 2024/2024-02-01-three-years-sixpivot %}), I must say it has been a consistent story.
 

@@ -1,14 +1,14 @@
 ---
 title: Source Link improvements in .NET 8 SDK
 date: '2024-01-26T17:30:00.000+10:30'
-image: /assets/2024/01/dotnet-logo.png
+image: ../../assets/2024/01/dotnet-logo.png
 tags:
 - .NET
 ---
 
 One enhancement included in the .NET 8 SDK you might have overlooked is that if you're using GitHub, GitHub Enterprise, Azure Repos, GitLab 12.0+, or Bitbucket 4.7+ then you no longer need to add a package reference to the respective `Microsoft.SourceLink.*` NuGet packages to get source link support.
 
-![.NET Logo](/assets/2024/01/dotnet-logo.png)
+<!-- ![.NET Logo](/assets/2024/01/dotnet-logo.png) -->
 
 Find out more about Source Link in the [NuGet documentation](https://learn.microsoft.com/dotnet/standard/library-guidance/sourcelink?WT.mc_id=DOP-MVP-5001655)
 

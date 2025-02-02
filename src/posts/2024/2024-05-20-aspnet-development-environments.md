@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 'Development' Environment confusion
 date: '2024-05-20T07:00:00.000+09:30'
-image: /assets/2024/01/dotnet-logo.png
+image: ../../assets/2024/01/dotnet-logo.png
 tags:
 - .NET
 ---

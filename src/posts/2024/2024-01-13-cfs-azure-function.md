@@ -1,7 +1,7 @@
 ---
 title: Azure Function posting an RSS feed to Mastodon
 date: '2024-01-13T13:00:00.000+10:30'
-image: /assets/2021/08/azure-function.png
+image: ../../assets/2021/08/azure-function.png
 tags:
 - Azure
 - Azure Functions

@@ -1,7 +1,7 @@
 ---
 title: Docker run from an Azure Pipeline Container Job with a volume mount
 date: '2024-05-10T17:30:00.000+09:30'
-image: /assets/2020/05/azure-pipelines-logo.png
+image: ../../assets/2020/05/azure-pipelines-logo.png
 tags:
 - Azure DevOps
 - Azure Pipelines

@@ -7,12 +7,15 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       // author: z.string().default(SITE.author),
+      //date: z.string().datetime({ offset: true }).transform((date) => Date.parse(date)),
       date: z.coerce.date(),
       // modDatetime: z.date().optional().nullable(),
       title: z.string(),
       // featured: z.boolean().optional(),
       draft: z.boolean().optional().default(false),
       tags: z.array(z.string()).default(["others"]),
+      image: image().optional(),
+      imageAlt: z.string().optional(),
       // ogImage: image()
       //   .refine(img => img.width >= 1200 && img.height >= 630, {
       //     message: "OpenGraph image must be at least 1200 X 630 pixels!",

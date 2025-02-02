@@ -1,7 +1,7 @@
 ---
 title: 'C# 12 features: Collection expressions'
 date: '2024-03-02T07:00:00.000+10:30'
-image: /assets/2024/03/logo_csharp.png
+image: ../../assets/2024/03/logo_csharp.png
 tags:
 - .NET
 ---

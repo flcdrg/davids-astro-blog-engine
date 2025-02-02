@@ -1,7 +1,7 @@
 ---
 title: ADNUG Streaming struggles
 date: '2024-02-05T08:00:00.000+10:30'
-#image: /assets
+#image: ../../assets
 tags:
 - ADNUG
 - Hardware

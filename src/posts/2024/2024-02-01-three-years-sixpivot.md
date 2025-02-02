@@ -1,14 +1,14 @@
 ---
 title: 3 years at SixPivot
 date: '2024-02-01T15:54:00.000+09:30'
-image: /assets/2024/02/sixpivot-logo.png
+image: ../../assets/2024/02/sixpivot-logo.png
 tags:
 - Work
 ---
 
 A month down already in 2024, which means it's my 3rd anniversary at SixPivot!
 
-![SixPivot logo](/assets/2024/02/sixpivot-logo.png)
+![SixPivot logo](../../assets/2024/02/sixpivot-logo.png)
 
 I'm pleased to report things continue to go well on the work front. Working for a remote-first company really does suit me. Here I sit (or sometimes stand) at my desk at home, looking out at my garden and to the hills beyond. My morning commute is (depending on the weather) a 5km walk around the neighbourhood, or if I'm feeling inspired a 20km bike ride. As long as there aren't too many meetings (which isn't that common for me) then being able to focus without distractions is very valuable.
 

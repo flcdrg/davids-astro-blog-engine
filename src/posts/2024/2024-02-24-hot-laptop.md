@@ -1,7 +1,7 @@
 ---
 title: Laptop heat wave
 date: '2024-02-24T17:00:00.000+10:30'
-#image: /assets
+#image: ../../assets
 tags:
 - Hardware
 - Synology
