@@ -1,41 +1,34 @@
 ---
-import { getCollection } from 'astro:content';
-import BlogPost from '../components/BlogPost.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import BlogPost from "../components/BlogPost.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPostExcerpt from "../components/BlogPostExcerpt.astro";
+
 const pageTitle = "My learning blog";
 const allPosts = (await getCollection("blog"))
-    .sort((a: any, b: any) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
-    .slice(0, 5);
-
-function getExcerpt(content: string, length: number) {
-    var excerptParagraphs = [];
-        var currentLength = 0;
-        var paragraphs = content.match(/<p>.*?<\/p>/gs) || [];
-        for (var _i = 0, paragraphs_1 = paragraphs; _i < paragraphs_1.length; _i++) {
-            var paragraph = paragraphs_1[_i];
-            // Strip HTML from the paragraph
-            var text = paragraph.replace(/(<([^>]+)>)/gi, "");
-            if (currentLength > 0 && currentLength + text.length > length) {
-                break;
-            }
-            excerptParagraphs.push(text);
-            currentLength += text.length;
-        }
-        return excerptParagraphs.join(" ") + `\u2026`;
-}
-
+  .sort(
+    (a: any, b: any) =>
+      new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+  )
+  .slice(0, 5);
 ---
+
 <BaseLayout pageTitle={pageTitle}>
-    <p>Recent posts:</p>
-    <ul>
-        {allPosts.map(async (post: any) => 
-            <div>
-                {new Date(post.data.date).toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}
-            <BlogPost url={`/${post.id}/`} title={post.data.title} /> 
+  <p>Recent posts:</p>
+  <ul>
+    {
+      allPosts.map(async (post) => (
+        <div>
+          {new Date(post.data.date).toLocaleDateString("en-AU", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+          <BlogPost url={`/${post.id}/`} title={post.data.title} />
 
-            {/* {getExcerpt(await post.compiledContent() as string, 200)} */}
-            </div>
-            )}
-      </ul>
+          <BlogPostExcerpt body={post.body} length={200} />
+        </div>
+      ))
+    }
+  </ul>
 </BaseLayout>
-

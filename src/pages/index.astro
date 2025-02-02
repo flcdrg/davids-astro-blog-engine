@@ -1,7 +1,35 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPost from '../components/BlogPost.astro';
+import BlogPostExcerpt from '../components/BlogPostExcerpt.astro';
 const pageTitle = "Home Page";
+
+const allPosts = (await getCollection("blog"))
+  .sort(
+    (a: any, b: any) =>
+      new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+  )
+  .slice(0, 5);
 ---
 <BaseLayout pageTitle={pageTitle}>
   <h2>My awesome blog subtitle</h2>
+
+  <p>Recent posts:</p>
+  <ul>
+    {
+      allPosts.map(async (post) => (
+        <div>
+          {new Date(post.data.date).toLocaleDateString("en-AU", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+          <BlogPost url={`/${post.id}/`} title={post.data.title} />
+
+          <BlogPostExcerpt body={post.body} length={200} />
+        </div>
+      ))
+    }
+  </ul>
 </BaseLayout>
