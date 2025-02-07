@@ -16,6 +16,21 @@ export async function getStaticPaths() {
     }));
 }
 
+const MonthMap: Record<string, string> = {
+  "1": "January",
+  "2": "February",
+  "3": "March",
+  "4": "April",
+  "5": "May",
+  "6": "June",
+  "7": "July",
+  "8": "August",
+  "9": "September",
+  "10": "October",
+  "11": "November",
+  "12": "December",
+};
+
 const { posts } = Astro.props;
 const { slug } = Astro.params;
 const pageTitle = slug ? `Archive for ${slug}` : "Archive";
@@ -23,10 +38,30 @@ const pageTitle = slug ? `Archive for ${slug}` : "Archive";
 
 <BaseLayout pageTitle={pageTitle}>
 
-  {posts.map((post) => (
-    <div>
-      <h2>{post.data.title}</h2>
-      <p>{post.data.date.toDateString()}</p>
-    </div>
-  ))}
+  {Object.entries(
+    getPostsByGroupCondition(
+      posts,
+      (post) => post.data.date.getMonth() + 1
+    )
+  )
+    .sort(([monthA], [monthB]) => Number(monthA) - Number(monthB))
+    .map(([month, monthGroup]) => (
+      <div class="flex flex-col sm:flex-row">
+        <h3>{MonthMap[month]}</h3>
+        <ul>
+          {monthGroup
+            .sort(
+              (a, b) =>
+                Math.floor(new Date(b.data.date).getTime() / 1000) -
+                Math.floor(new Date(a.data.date).getTime() / 1000)
+            )
+            .map(({ id, data /*, slug */ }) => (
+              <li>
+                <a href={`/${id}/`}>{data.title}</a>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ))}
+
 </BaseLayout>
