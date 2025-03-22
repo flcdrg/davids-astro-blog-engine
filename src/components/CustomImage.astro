@@ -3,19 +3,11 @@ import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 
 interface Props {
-    // mobileImgUrl: string | ImageMetadata;
     desktopImgUrl: string | ImageMetadata;
     alt: string | undefined;
 }
 
 const { desktopImgUrl, alt } = Astro.props;
-
-// const mobileImg = await getImage({
-//     src: mobileImgUrl,
-//     format: "webp",
-//     width: 200,
-//     height: 200,
-// });
 
 const desktopImg = await getImage({
     src: desktopImgUrl,

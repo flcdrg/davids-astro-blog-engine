@@ -1,17 +1,30 @@
 ---
 import { getCollection, render } from 'astro:content';
 import MarkdownPostLayout from '../layouts/MarkdownPostLayout.astro';
+import getPostsByGroupCondition from "../scripts/getPostsByGroupCondition";
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(post => ({
+
+  const years = Object.entries(
+    getPostsByGroupCondition(posts, (post) => post.data.date.getFullYear())
+  )
+    .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+    .map(([year, yearGroup]) => ({
+      params: { slug: year },
+      props: { posts: yearGroup },
+    }));
+
+  const individualPosts = posts.map(post => ({
     params: { slug: post.id }, props: { post },
   }));
+
+  return [...years, ...individualPosts];
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+//const { Content } = await render(post);
 ---
-<MarkdownPostLayout frontmatter={post.data}>
+<!-- <MarkdownPostLayout frontmatter={post.data}>
   <Content />
-</MarkdownPostLayout>
+</MarkdownPostLayout> -->

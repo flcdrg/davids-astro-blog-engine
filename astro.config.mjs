@@ -5,6 +5,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: "https://aesthetic-gumdrop-a81100.netlify.app/",
   integrations: [],
+  experimental: {
+    svg: true
+  },
   build: {
     format: 'file'
   }
