@@ -67,6 +67,52 @@ html {
     background-color: #ff9776;
   }
   
+  .social-media-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .social-media-list {
+    display: table;
+    margin: 0 auto;
+    li {
+      float: left;
+      margin: 5px 10px 5px 0;
+      &:last-of-type { margin-right: 0 }
+      a {
+        display: block;
+        padding: 3em / 4;
+        border: 1px solid rgb(205, 205, 205);
+       /* &:hover { border-color: $border-color-02 } */
+      }
+    }
+  }
+
+/**
+ * Icons
+ */
+
+.orange {
+  color: #f66a0a;
+}
+
+.grey {
+  color: #747474;
+}
+
+.svg-icon {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  fill: currentColor;
+  padding: 5px 3px 2px 5px;
+  vertical-align: text-bottom;
+}
+
+  /* .svg-icon {
+    padding: 5px 5px 2px 0
+  } */
+
   .expanded {
     display: unset;
   }
