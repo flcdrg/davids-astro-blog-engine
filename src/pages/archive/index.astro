@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import getPostsByGroupCondition from "../../scripts/getPostsByGroupCondition";
+import { DateTime } from "luxon";
 
 const pageTitle = "Archive";
 
@@ -27,7 +28,7 @@ const MonthMap: Record<string, string> = {
   <ul>
   {
     Object.entries(
-      getPostsByGroupCondition(posts, (post) => post.data.date.getFullYear())
+      getPostsByGroupCondition(posts, (post) => DateTime.fromISO(post.data.date).year)
     )
       .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
       .map(([year]) => (

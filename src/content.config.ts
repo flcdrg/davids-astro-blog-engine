@@ -1,5 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { DateTime } from "luxon";
 
 const blog = defineCollection({
   type: "content_layer",
@@ -8,7 +9,7 @@ const blog = defineCollection({
     z.object({
       // author: z.string().default(SITE.author),
       //date: z.string().datetime({ offset: true }).transform((date) => Date.parse(date)),
-      date: z.coerce.date(),
+      date: z.string().datetime({ offset: true }),
       // modDatetime: z.date().optional().nullable(),
       title: z.string(),
       // featured: z.boolean().optional(),

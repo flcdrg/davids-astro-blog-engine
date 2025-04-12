@@ -3,9 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 import BlogPostExcerpt from '../components/BlogPostExcerpt.astro';
-import { Image } from 'astro:assets';
-import { getImage } from "astro:assets";
 import CustomImage from '../components/CustomImage.astro';
+import DateTimeComponent from '../components/DateTimeComponent.astro';
 const pageTitle = "David Gardiner";
 
 const allPosts = (await getCollection("blog"))
@@ -17,31 +16,21 @@ const allPosts = (await getCollection("blog"))
 
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <h2>A blog of software development, .NET and other interesting things
-    About
-    </h2>
-
   <p>Recent posts:</p>
 
-  <ul class="list-none">
     {
       allPosts.map(async (post) => (
-        <div>
-          <h3><BlogPost url={`/${post.id}/`} title={post.data.title} /></h3>
+        <section>
+          <h2><BlogPost url={`/${post.id}/`} title={post.data.title} /></h2>
 
           {/* {JSON.stringify(post.data.date)} */}
 
-          <p><time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString("en-AU", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}</time></p>
+          <p><DateTimeComponent date={post.data.date} /> </p>
 
 
-          {/* <Image src={post.data.image!} /> */}
-          { post.data.image &&
+          {/* { post.data.image &&
           <CustomImage desktopImgUrl={post.data.image!} alt={post.data.imageAlt} />
-          }
+          } */}
           
           {/* <img src={post.data.image} alt={post.data.title} /> */}
           {/* <img src={post.data
@@ -52,10 +41,10 @@ const allPosts = (await getCollection("blog"))
 
 
           <BlogPostExcerpt body={post.body} length={200} />
-        </div>
+        </section>
       ))
     }
-  </ul>
+
 </BaseLayout>
 
 <style>
