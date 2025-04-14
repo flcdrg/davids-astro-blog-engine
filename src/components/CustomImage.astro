@@ -22,3 +22,10 @@ const desktopImg = await getImage({
     <source media="(min-width: 100px)" srcset={desktopImg.src} />
     <img src={desktopImg.src} alt={alt || undefined} />
 </picture>
+
+<style>
+    picture {
+        float: left;
+        margin: 0 1em 1em 0;
+    }
+</style>
