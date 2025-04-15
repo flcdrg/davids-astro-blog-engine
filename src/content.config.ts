@@ -15,7 +15,6 @@ const blog = defineCollection({
       const date = DateTime.fromISO(data.date as string, { setZone: true });
 
       const id = entry.substring(16);
-      console.log("id", id);
       const slug = `${date.toFormat("yyyy")}/${date.toFormat("MM")}/${id}`;
 
       return slug.replace(/\.md$/, '');
