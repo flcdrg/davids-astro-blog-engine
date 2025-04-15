@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import getPostsByGroupCondition from '../../scripts/getPostsByGroupCondition';
+import { DateTime } from 'luxon';
+
+// interface Params {
+//   year: number;
+//   id: string;
+// }
+
+export async function getStaticPaths() {
+
+  const posts = await getCollection("blog");
+
+  const years = Object.entries(
+    getPostsByGroupCondition(posts, (post) => DateTime.fromISO(post.data.date).toJSDate().getFullYear())
+  )
+    .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+    .map(([year, yearGroup]) => ({
+      params: { year },
+      props: { posts: yearGroup },
+    }));
+
+  return years;
+}
+
+const { year } = Astro.params;
+const posts = Astro.props.posts;
+
+---
+<h1>{year}</h1>
+
+<ul class="list-none">
+  {posts.map((post) => (
+    <li>
+      <a href={`/${post.id}/`}>{post.data.title}</a>
+    </li>
+  ))}

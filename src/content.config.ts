@@ -1,14 +1,30 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { DateTime } from "luxon";
 
 const blog = defineCollection({
   type: "content_layer",
-  loader: glob({ pattern: "**/*.md", base: "./src/posts" }),
+  loader: glob({ 
+    pattern: "**/*.md", 
+    base: "./src/posts",
+    generateId: ({ entry, base, data }) => {
+      // console.log("entry", entry);
+      // console.log("base", base);
+      // console.log("data", data);
+
+      const date = DateTime.fromISO(data.date as string, { setZone: true });
+
+      const id = entry.substring(16);
+      const slug = `${date.toFormat("yyyy")}/${date.toFormat("MM")}/${id}`;
+
+      return slug.replace(/\.md$/, '');
+    },
+  }),
   schema: ({ image }) =>
     z.object({
       // author: z.string().default(SITE.author),
       //date: z.string().datetime({ offset: true }).transform((date) => Date.parse(date)),
-      date: z.coerce.date(),
+      date: z.string().datetime({ offset: true }),
       // modDatetime: z.date().optional().nullable(),
       title: z.string(),
       // featured: z.boolean().optional(),

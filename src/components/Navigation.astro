@@ -1,8 +1,32 @@
 ---
+import ThemeIcon from "./ThemeIcon.astro";
+
 ---
-<div class="nav-links">
-<a href="/">Home</a>
-<a href="/tags/">Tags</a>
-<a href="/archive/">Archive</a>
-<a href="/about/">About</a>
+
+<div class="nav-container">
+  <div class="profile">
+    <img
+      src="https://www.gravatar.com/avatar/37edf2567185071646d62ba28b868fab"
+      alt="Photo of David Gardiner"
+    />
+    <div class="site-title">
+      <div>
+        David Gardiner
+      </div>
+      <div class="site-subtitle">
+        A blog of software development, .NET and other interesting things
+      </div>
+    </div>
+  </div>
+  
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/tags/">Tags</a>
+    <a href="/archive/">Archive</a>
+    <a href="/about/">About</a>
+    <ThemeIcon />
+
+</div>
+
+
 </div>

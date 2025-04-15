@@ -2,32 +2,20 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import getPostsByGroupCondition from "../../scripts/getPostsByGroupCondition";
+import { DateTime } from "luxon";
 
 const pageTitle = "Archive";
 
 const posts = await getCollection("blog");
-
-const MonthMap: Record<string, string> = {
-  "1": "January",
-  "2": "February",
-  "3": "March",
-  "4": "April",
-  "5": "May",
-  "6": "June",
-  "7": "July",
-  "8": "August",
-  "9": "September",
-  "10": "October",
-  "11": "November",
-  "12": "December",
-};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
+
+  <h1>Posts by year</h1>
   <ul>
   {
     Object.entries(
-      getPostsByGroupCondition(posts, (post) => post.data.date.getFullYear())
+      getPostsByGroupCondition(posts, (post) => DateTime.fromISO(post.data.date).year)
     )
       .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
       .map(([year]) => (
