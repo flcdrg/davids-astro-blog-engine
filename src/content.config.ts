@@ -4,7 +4,23 @@ import { DateTime } from "luxon";
 
 const blog = defineCollection({
   type: "content_layer",
-  loader: glob({ pattern: "**/*.md", base: "./src/posts" }),
+  loader: glob({ 
+    pattern: "**/*.md", 
+    base: "./src/posts",
+    generateId: ({ entry, base, data }) => {
+      // console.log("entry", entry);
+      // console.log("base", base);
+      // console.log("data", data);
+
+      const date = DateTime.fromISO(data.date as string, { setZone: true });
+
+      const id = entry.substring(16);
+      console.log("id", id);
+      const slug = `${date.toFormat("yyyy")}/${date.toFormat("MM")}/${id}`;
+
+      return slug.replace(/\.md$/, '');
+    },
+  }),
   schema: ({ image }) =>
     z.object({
       // author: z.string().default(SITE.author),
