@@ -1,0 +1,30 @@
+---
+import type {
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
+import { getCollection } from "astro:content";
+import { DateTime } from "luxon";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog');
+
+  return posts.map(post => ({
+    params: { slug: post.id, year: DateTime.fromISO(post.data.date).month },
+    props: { post, year: DateTime.fromISO(post.data.date).year },
+  }));
+
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props as Props;
+const { } = Astro.params as Params;
+
+---
+{post &&
+
+  <h1>{post.filePath}</h1>
+}

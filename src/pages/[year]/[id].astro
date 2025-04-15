@@ -1,20 +1,19 @@
 ---
-interface Params {
-  year: number;
-  id: string;
-}
+// interface Params {
+//   year: number;
+//   id: string;
+// }
 
 export async function getStaticPaths() {
+  
   const pages = [
     {
       year: 2025,
-      title: "Astro products",
       id: "astro-products",
     },
     {
       year: 2024,
-      title: "The ultimate Astro handbook",
-        id: "astro-handbook",
+      id: "astro-handbook",
     },
   ];
 

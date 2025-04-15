@@ -9,6 +9,6 @@ export default defineConfig({
     svg: true
   },
   build: {
-    format: 'file'
+    format: 'preserve'
   }
 });
