@@ -13,15 +13,6 @@ export const getStaticPaths = (async () => {
 
   return posts.map((post) => {
 
-    //const date = DateTime.fromISO(post.data.date);
-    
-    //console.log(post);
-
-    // id has the format '2024/2024-12-15-sonarcloud'.
-    // Remove the year and date prefix.
-    //const id = post.id.substring(16)
-
-    //const slug = `${date.toFormat("yyyy")}/${date.toFormat("MM")}/${id}`;
     return ({
       params: {
         slug: post.id
