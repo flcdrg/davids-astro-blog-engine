@@ -10,7 +10,6 @@ const posts = await getCollection("blog");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-
   <h1>Posts by year</h1>
   <ul>
   {
@@ -19,9 +18,7 @@ const posts = await getCollection("blog");
     )
       .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
       .map(([year]) => (
-        
-        <li><a href={year}>{year}</a></li>
-        
+        <li><a href={`/${year}`}>{year}</a></li>
       ))
   }
   </ul>

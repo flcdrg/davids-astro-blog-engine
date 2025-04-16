@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import getPostsByGroupCondition from '../../scripts/getPostsByGroupCondition';
 import { DateTime } from 'luxon';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 // interface Params {
 //   year: number;
@@ -18,7 +19,7 @@ export async function getStaticPaths() {
     .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
     .map(([year, yearGroup]) => ({
       params: { year },
-      props: { posts: yearGroup },
+      props: { posts: yearGroup.sort((a, b) => DateTime.fromISO(a.data.date).toJSDate().getTime() - DateTime.fromISO(b.data.date).toJSDate().getTime()) },
     }));
 
   return years;
@@ -26,13 +27,27 @@ export async function getStaticPaths() {
 
 const { year } = Astro.params;
 const posts = Astro.props.posts;
+const pageTitle = `Posts from ${year}`;
 
+function formatDateWithSuffix(dateString: string) {
+  const date = DateTime.fromISO(dateString);
+  const day = date.day;
+  const suffix = (day % 10 === 1 && day !== 11) ? 'st' :
+                 (day % 10 === 2 && day !== 12) ? 'nd' :
+                 (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
+  return `${date.toFormat('d')}${suffix} ${date.toFormat('MMMM')}`;
+}
 ---
+<BaseLayout pageTitle={pageTitle}>
+
 <h1>{year}</h1>
 
 <ul class="list-none">
   {posts.map((post) => (
     <li>
-      <a href={`/${post.id}/`}>{post.data.title}</a>
+      <time datetime={post.data.date} class="text-gray-500">{formatDateWithSuffix(post.data.date)}</time>
+      - <a href={`/${post.id}/`}>{post.data.title}</a>
     </li>
   ))}
+</ul>
+</BaseLayout>
