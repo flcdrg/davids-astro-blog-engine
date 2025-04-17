@@ -1,8 +1,9 @@
 # Define the directory to search for .md files
-$directory = "d:\git\astro-tutorial-blog\src\posts"
+$directory = "D:\git\astro-tutorial-blog\src\posts\2025\2025-02-01-four-years-sixpivot.md"
 
 # Define the regex pattern to match the markdown link
-$pattern = "\[([^\]]+)\]\(\{% post_url (\d{4})/(\d{2})/(\d{2})-([^\s%]+) %\}\)"
+# [new laptop]({% post_url 2023/2023-04-26-new-laptop %})
+$pattern = "\[([^\]]+)\]\(\{% post_url (\d{4})/\d{4}-(\d{2})-(\d{2})-([^\s%]+) %\}\)"
 
 # Loop through all .md files in the directory and its subdirectories
 Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
