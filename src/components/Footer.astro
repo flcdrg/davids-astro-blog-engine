@@ -1,19 +1,73 @@
 ---
-import Social from './Social.astro';
+
+// Font Awesome
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faStackOverflow, faGithub, faLinkedin, faMastodon, faBluesky } from "@fortawesome/free-brands-svg-icons";
+import { faRssSquare } from "@fortawesome/free-solid-svg-icons";
+
+// Declare all the icons you plan on using
+library.add(faRssSquare, faStackOverflow, faGithub, faLinkedin, faMastodon, faBluesky);
+
+// Instantiate the icon with the icon function
+const rssIcon = icon({ prefix: "fas", iconName: faRssSquare.iconName });
+const stackOverflowIcon = icon({ prefix: "fab", iconName: faStackOverflow.iconName });
+const githubIcon = icon({ prefix: "fab", iconName: faGithub.iconName });
+const linkedinIcon = icon({ prefix: "fab", iconName: faLinkedin.iconName });
+const mastodonIcon = icon({ prefix: "fab", iconName: faMastodon.iconName });
+const blueskyIcon = icon({ prefix: "fab", iconName: faBluesky.iconName });
 
 ---
 
-<style>
-    footer {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
-
 <footer>
     <ul class="social-media-list">
-      <li><a rel="me" href="https://github.com/flcdrg" title="GitHub"><svg viewBox="0 0 30 30" class="svg-icon grey"><use xlink:href="/minima-social-icons.svg#github"></use></svg></a></li>
-      <li><a rel="me" href=""><svg viewBox="0 0 30 30" class="svg-icon orange"><use xlink:href="/minima-social-icons.svg#rss"></use></svg></a></li>
+      <li><a rel="me" href="https://feeds.feedburner.com/DavesDaydreams"><Fragment set:html={rssIcon.html} /></a></li>
+      <li><a rel="me" href="https://github.com/flcdrg" title="GitHub"><Fragment set:html={githubIcon.html}/></a></li>
+      <li><a rel="me" href="https://www.linkedin.com/in/flcdrg/" title="LinkedIn"><Fragment set:html={linkedinIcon.html}/></a></li>
+      <li><a rel="me" href="https://stackoverflow.com/users/25702/david-gardiner" title="Stack Overflow"><Fragment set:html={stackOverflowIcon.html} /></a></li>
+      <li><a rel="me" href="https://mastodon.online/@DavidRGardiner" title="Mastodon"><Fragment set:html={mastodonIcon.html} /></a></li>
+      <li><a rel="me" href="https://bsky.app/profile/david.gardiner.net.au" title="Bluesky"><Fragment set:html={blueskyIcon.html} /></a></li>
     </ul>
 </footer>
+
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
+
+<style is:global>
+/* Declare a custom CSS class to make the icon look right */
+
+.svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+  display: inline-block;
+  height: 2.5em;
+  vertical-align: -0.125em;
+}
+
+.svg-inline--fa.fa-stack-overflow {
+  color: #f58024;
+}
+
+.svg-inline--fa.fa-github {
+  color: #333;
+}
+
+.svg-inline--fa.fa-linkedin {
+  color: #0077b5;
+}
+
+.svg-inline--fa.fa-mastodon {
+  color: #6364ff;
+}
+.svg-inline--fa.fa-bluesky {
+  color: #00a4f0;
+}
+.svg-inline--fa.fa-square-rss {
+  color: #ff6600;
+}
+
+</style>
