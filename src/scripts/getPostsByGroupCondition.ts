@@ -13,6 +13,7 @@ const getPostsByGroupCondition = (
   const result: Record<GroupKey, CollectionEntry<"blog">[]> = {};
   for (let i = 0; i < posts.length; i++) {
     const item = posts[i];
+    if (!item) continue;
     const groupKey = groupFunction(item, i);
     if (!result[groupKey]) {
       result[groupKey] = [];

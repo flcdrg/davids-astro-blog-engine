@@ -4,7 +4,13 @@ import getPostsByGroupCondition from '../../scripts/getPostsByGroupCondition';
 import { DateTime } from 'luxon';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export async function getStaticPaths() {
+import type {
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
+
+export const getStaticPaths = (async () => {
 
   const posts = await getCollection("blog");
 
@@ -18,10 +24,13 @@ export async function getStaticPaths() {
     }));
 
   return years;
-}
+}) satisfies GetStaticPaths;
 
-const { year } = Astro.params;
-const posts = Astro.props.posts;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { year } = Astro.params as Params;
+const { posts } = Astro.props as Props;
 const pageTitle = `Posts from ${year}`;
 
 function formatDateWithSuffix(dateString: string) {
