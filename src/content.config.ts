@@ -7,7 +7,7 @@ const blog = defineCollection({
   loader: glob({ 
     pattern: "**/*.md", 
     base: "./src/posts",
-    generateId: ({ entry, base, data }) => {
+    generateId: ({ entry, data }) => {
       const date = DateTime.fromISO(data.date as string, { setZone: true });
 
       const id = entry.substring(16);
