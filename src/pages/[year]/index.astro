@@ -4,11 +4,6 @@ import getPostsByGroupCondition from '../../scripts/getPostsByGroupCondition';
 import { DateTime } from 'luxon';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-// interface Params {
-//   year: number;
-//   id: string;
-// }
-
 export async function getStaticPaths() {
 
   const posts = await getCollection("blog");
