@@ -50,7 +50,7 @@ function formatDateWithSuffix(dateString: string) {
   {posts.map((post) => (
     <li>
       <time datetime={post.data.date} class="text-gray-500">{formatDateWithSuffix(post.data.date)}</time>
-      - <a href={`/${post.id}/`}>{post.data.title}</a>
+      - <a href={`/${post.id}.html`}>{post.data.title}</a>
     </li>
   ))}
 </ul>

@@ -21,7 +21,7 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
     $updatedContent = $updatedContent -replace "image: /assets", "image: ../../assets"
 
     # Assets paths in remaining content
-    $updatedContent = $updatedContent -replace "/assets/", "../../assets/"
+    $updatedContent = $updatedContent -replace "(?<!\.\.)/assets/", "../../assets/"
 
     # Save the updated content back to the file if changes were made
     if ($content -ne $updatedContent) {
