@@ -23,6 +23,9 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
     # Assets paths in remaining content
     $updatedContent = $updatedContent -replace "(?<!\.\.)/assets/", "../../assets/"
 
+    # Ensure just a single blank line at the end of the file
+    $updatedContent = $updatedContent.TrimEnd()
+
     # Save the updated content back to the file if changes were made
     if ($content -ne $updatedContent) {
         Set-Content -Path $filePath -Value $updatedContent
