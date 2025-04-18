@@ -2,34 +2,45 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 const pageTitle = "Tags";
-const allPosts = await getCollection("blog")
-const tags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
+const allPosts = await getCollection("blog");
+
+// Collate all tags from all posts and count posts per tag
+const tagCounts = allPosts
+  .flatMap((post: any) => post.data.tags)
+  .reduce((acc: Record<string, number>, tag: string) => {
+    acc[tag] = (acc[tag] || 0) + 1;
+    return acc;
+  }, {});
+
+const tags = Object.entries(tagCounts).sort(([tagA], [tagB]) => tagA.localeCompare(tagB));
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="tags">
-      {tags.map((tag) => (
-        <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-      ))}
-    </div>
+    {tags.map(([tag, count]) => (
+      <p class="tag">
+        <a href={`/tags/${tag}`}>{tag}</a> ({count})
+      </p>
+    ))}
+  </div>
 </BaseLayout>
 
 <style>
-    a {
-      color: #00539F;
-    }
-  
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  
-    .tag {
-      margin: 0.25em;
-      border: dotted 1px #a1a1a1;
-      border-radius: .5em;
-      padding: .5em 1em;
-      font-size: 1.15em;
-      background-color: #F8FCFD;
-    }
-  </style>
+  a {
+    color: #00539F;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+</style>
