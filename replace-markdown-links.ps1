@@ -1,5 +1,6 @@
-# Define the directory to search for .md files
-$directory = "D:\git\astro-tutorial-blog\src\posts\"
+param(
+    [string]$directory = ".\src\posts\"
+)
 
 # Define the regex pattern to match the markdown link
 # [new laptop]({% post_url 2023/2023-04-26-new-laptop %})
@@ -12,6 +13,15 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
 
     # Replace the markdown link with the desired HTML link format
     $updatedContent = $content -replace $pattern, '[$1](/$2/$3/$5)'
+
+    # Remove the 'layout: post' line
+    $updatedContent = $updatedContent -replace "layout: post`r?`n", ""
+
+    # Assets path in the front matter
+    $updatedContent = $updatedContent -replace "image: /assets", "image: ../../assets"
+
+    # Assets paths in remaining content
+    $updatedContent = $updatedContent -replace "/assets/", "../../assets/"
 
     # Save the updated content back to the file if changes were made
     if ($content -ne $updatedContent) {
