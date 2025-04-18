@@ -21,24 +21,15 @@ const allPosts = (await getCollection("blog"))
     {
       allPosts.map(async (post) => (
         <section>
-          <h2><BlogPost url={`/${post.id}/`} title={post.data.title} /></h2>
-
-          {/* {JSON.stringify(post.data.date)} */}
+          <h2><BlogPost url={`/${post.id}.html`} title={post.data.title} /></h2>
 
           <p><DateTimeComponent date={post.data.date} /> </p>
-
 
           { post.data.image &&
           <CustomImage desktopImgUrl={post.data.image!} alt={post.data.imageAlt} />
           }
           
-          {/* <img src={post.data.image} alt={post.data.title} /> */}
-          {/* <img src={post.data
-          {post.data.image}
-
-          {/* <img style='height: 100%; width: 100%; object-fit: contain' src={post.data.image} alt={post.data.title} /> */}
-
-          <BlogPostExcerpt body={post.body} length={500} /> <a href={`/${post.id}/`}>Read more...</a>
+          <BlogPostExcerpt body={post.body} length={500} /> <a href={`/${post.id}.html`}>Read more...</a>
 
           <div style="clear: both" />
 
