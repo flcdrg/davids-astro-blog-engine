@@ -1,5 +1,5 @@
 # Define the directory to search for .md files
-$directory = "D:\git\astro-tutorial-blog\src\posts\2025\2025-02-01-four-years-sixpivot.md"
+$directory = "D:\git\astro-tutorial-blog\src\posts\"
 
 # Define the regex pattern to match the markdown link
 # [new laptop]({% post_url 2023/2023-04-26-new-laptop %})
@@ -11,7 +11,7 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
     $content = Get-Content -Path $filePath -Raw
 
     # Replace the markdown link with the desired HTML link format
-    $updatedContent = $content -replace $pattern, '<a href="/$2/$3/$5">$1</a>'
+    $updatedContent = $content -replace $pattern, '[$1](/$2/$3/$5)'
 
     # Save the updated content back to the file if changes were made
     if ($content -ne $updatedContent) {
