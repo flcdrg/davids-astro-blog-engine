@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@types/luxon": "^3.4.2",
     "astro": "^5.7.2",
+    "astrojs-atom": "^1.0.0",
     "luxon": "^3.5.0",
     "marked": "^15.0.8",
     "sharp": "^0.34.1",
@@ -29,5 +30,6 @@
   },
   "engines": {
     "node": ">=22.0.0"
-  }
+  },
+  "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677"
 }
