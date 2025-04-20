@@ -24,7 +24,7 @@ export async function GET(context) {
     description: 'A blog of software development, .NET and other interesting things',
     site: context.site,
     entry: posts.map((post) => ({
-      id: `https://david.gardiner.net.au/${post.id}.html`,
+      id: `https://david.gardiner.net.au/${post.id}`,
       updated: post.data.date,
       title: post.data.title,
       content: post.data.description
