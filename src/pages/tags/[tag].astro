@@ -34,6 +34,6 @@ const { posts } = Astro.props as Props;
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
   <ul>
-    {posts.map((post: any) => <li><BlogPost url={`/${post.id}.html`} title={post.data.title} /> (<DateTimeComponent date={post.data.date} />)</li>)}
+    {posts.map((post: any) => <li><BlogPost url={`/${post.id}`} title={post.data.title} /> (<DateTimeComponent date={post.data.date} />)</li>)}
   </ul>
 </BaseLayout>

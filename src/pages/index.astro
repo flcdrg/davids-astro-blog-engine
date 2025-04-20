@@ -21,7 +21,7 @@ const allPosts = (await getCollection("blog"))
     {
       allPosts.map(async (post) => (
         <section>
-          <h2><BlogPost url={`/${post.id}.html`} title={post.data.title} /></h2>
+          <h2><BlogPost url={`${new URL(post.id, Astro.url)}`} title={post.data.title} /></h2>
 
           <p><DateTimeComponent date={post.data.date} /> </p>
 
@@ -29,7 +29,7 @@ const allPosts = (await getCollection("blog"))
           <CustomImage desktopImgUrl={post.data.image!} alt={post.data.imageAlt} />
           }
           
-          <BlogPostExcerpt body={post.body} length={500} /> <a href={`/${post.id}.html`}>Read more...</a>
+          <BlogPostExcerpt body={post.body} length={500} /> <a href={`/${new URL(post.id, Astro.site)}`}>Read more...</a>
 
           <div style="clear: both" />
 
