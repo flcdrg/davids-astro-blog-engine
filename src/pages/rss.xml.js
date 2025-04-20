@@ -11,14 +11,13 @@ export async function GET(context) {
   const sortedPosts = posts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
   const postsToInclude = sortedPosts.slice(0, 10); // Get the latest 10 posts
 
-
-
   return atom({
     id: context.site.toString(),
     title: 'David Gardiner',
     updated: new Date().toISOString(),
     description: 'A blog of software development, .NET and other interesting things',
     site: context.site,
+    lang: 'en-AU',
     entry: postsToInclude.map((post) => ({
       id: `${(new URL(post.id, context.site)).toString()}`,
       updated: post.data.date,
