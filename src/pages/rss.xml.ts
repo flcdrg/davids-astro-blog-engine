@@ -63,6 +63,14 @@ export async function GET(context: APIContext) {
       category: post.data.tags.map((tag) => ({
         term: tag,
       })),
+      link: [
+        {
+          rel: 'alternate',
+          href: `${(new URL(post.id, context.site)).toString()}`,
+          type: 'text/html',
+          title: post.data.title,
+        },
+      ]
     })),
   });
 }
