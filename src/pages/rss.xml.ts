@@ -33,6 +33,11 @@ export async function GET(context: APIContext) {
       value: 'David Gardiner',
       type: 'html',
     },
+    author: [
+      {
+        name: 'David Gardiner',
+      }
+    ],
     updated: new Date().toISOString(),
     subtitle: 'A blog of software development, .NET and other interesting things',
     link: [
@@ -70,7 +75,10 @@ export async function GET(context: APIContext) {
           type: 'text/html',
           title: post.data.title,
         },
-      ]
+      ],
+      thumbnail: post.data.image ? {
+        url: `${(new URL(post.data.image.src, context.site)).toString()}`,
+      } : undefined,
     })),
   });
 }
