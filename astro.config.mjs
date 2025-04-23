@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://david.gardiner.net.au/", // "https://aesthetic-gumdrop-a81100.netlify.app/"
+  site: process.env.DEPLOY_PRIME_URL || "https://david.gardiner.net.au/",
   integrations: [sitemap()],
   experimental: {
   },
