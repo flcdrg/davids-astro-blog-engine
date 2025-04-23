@@ -32,9 +32,12 @@ importers:
       astro:
         specifier: ^5.7.4
         version: 5.7.4(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1)
+      astro-disqus:
+        specifier: ^1.0.1
+        version: 1.0.1
       astrojs-atom:
-        specifier: ^1.0.40
-        version: 1.0.40(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1)
+        specifier: ^1.0.42
+        version: 1.0.42(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1)
       luxon:
         specifier: ^3.6.1
         version: 3.6.1
@@ -798,13 +801,16 @@ packages:
   array-iterate@2.0.1:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
 
+  astro-disqus@1.0.1:
+    resolution: {integrity: sha512-x0VAc/f8zzt09RBef4ffmqaVBEL8tS1qZBUPvuFygGkrlkz/QV1tld0oLSl+/SwgNOYOMfuXJerKiMLC1+n3WQ==}
+
   astro@5.7.4:
     resolution: {integrity: sha512-h+pndGOyoYbsBd0YvP7bL3gotUSlyltp8OLpcYg062w0n5c96wJ9xt/RmwwXzGbdcUjWFtw0c5z4zCA92NDmlA==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
-  astrojs-atom@1.0.40:
-    resolution: {integrity: sha512-2XLSv/FPgyqjDRG1a7TyrL5chQXVwpd0BlUtNLZwzLFlB6dENfdEqof07Nu6Pn7pTEzarfNDSm+v5jiwFim1Iw==}
+  astrojs-atom@1.0.42:
+    resolution: {integrity: sha512-coOPPuLu9Cx5F70v3MesNbvT2mFaoRPmL7knMBfYV8hfNNpycNOFr+X1opjgNuYq9EnKlzorbf3YOfYGy0XHPw==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -2709,6 +2715,8 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
+  astro-disqus@1.0.1: {}
+
   astro@5.7.4(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1):
     dependencies:
       '@astrojs/compiler': 2.11.0
@@ -2807,7 +2815,7 @@ snapshots:
       - uploadthing
       - yaml
 
-  astrojs-atom@1.0.40(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1):
+  astrojs-atom@1.0.42(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1):
     dependencies:
       astro: 5.7.4(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1)
       fast-xml-parser: 5.2.1
