@@ -31,7 +31,7 @@ The following month I'd done some further testing. I discovered that the Rode mi
 
 The next problem we hit was that the data projector didn't seem happy having the Elgato capture device plugged in. The display in the room we normally use is a multi-screen wall display (so not an actual projector).
 
-![Multi-screen display with Ryan presenting in front of it](/assets/2024/02/multi-screen-display.jpg)
+![Multi-screen display with Ryan presenting in front of it](../../assets/2024/02/multi-screen-display.jpg)
 
 We've had issues with this display in the past, even before we tried streaming. Some laptops just didn't like it (they'd display for a few seconds, then the screen would go blank). It was so bad we ended up having to do a screen share from the speaker's laptop to another laptop that was known to work with the display. I'm guessing there's some kind of signal strength issue, but it is hard to know for sure. We use a room at the University of South Australia, and the equipment probably gets a fair bit of wear and tear.
 
@@ -43,11 +43,11 @@ In the months that followed we tried various combinations and managed to get the
 
 The audio was refined a bit by making use of the [Rode Connect](https://rode.com/en/apps/rodeconnect) application to allow the mixing/muting of the two wireless mics. Much easier to mute the mics remotely, rather than having to ask the presenters to turn their mics on and off. The only downside is that the audio from Rode Connect comes into [OBS Studio](https://obsproject.com/) as a single channel, rather than two separate ones.
 
-![Rode Connect software](/assets/2024/02/rode-connect.png)
+![Rode Connect software](../../assets/2024/02/rode-connect.png)
 
 Working on the theory that the video signal strength might be the problem, I wondered if an HDMI signal amplifier might help. I bought a [StarTech.com HDBOOST4K 4K 60Hz HDMI Signal Booster](https://www.amazon.com.au/gp/product/B07YVYK11D?&linkCode=ll1&tag=flcdrg07-22&linkId=f3f0e942cf6e74329e8f780ef972ec37&language=en_AU&ref_=as_li_ss_tl) and tried it out. It did seem to provide a bit more stability, but that element of doubt remained. One issue that remained was that switching presenter laptops would still interrupt the signal. The Elgato seemed to need a power cycle to cope with the change.
 
-![StarTech.com HDMI Signal booster](/assets/2024/02/startech-hdmi-amplifier.jpg)
+![StarTech.com HDMI Signal booster](../../assets/2024/02/startech-hdmi-amplifier.jpg)
 
 So we had something that worked, but it could be better.
 
@@ -60,8 +60,8 @@ So now I've bought the following to try out at the next meeting:
 - [Simplecom CM412 HDMI 2 Port HDMI Duplicator](https://www.amazon.com.au/gp/product/B08H2BBH5M?&linkCode=ll1&tag=flcdrg07-22&linkId=cb28cfb1cd98d42185d61cc51a4b0afd&language=en_AU&ref_=as_li_ss_tl)
 - [4K HDMI USB-C Capture Card](https://www.amazon.com.au/gp/product/B0C2HG93TG?th=1&linkCode=ll1&tag=flcdrg07-22&linkId=62d35cb2d9dbc15e956f636d2566491e&language=en_AU&ref_=as_li_ss_tl) (similar to the model above).
 
-![Simplecom HDMI 2-port duplicator](/assets/2024/02/simplecom-hdmi-duplicator.jpg)
-![HDMI Capture Card](/assets/2024/02/hdmi-capture-card.jpg)
+![Simplecom HDMI 2-port duplicator](../../assets/2024/02/simplecom-hdmi-duplicator.jpg)
+![HDMI Capture Card](../../assets/2024/02/hdmi-capture-card.jpg)
 
 I'm not sure how the HDMI splitter will go - I fear the multi-screen display might not like it either, but it's worth a shot, and they're not that expensive.
 
@@ -73,7 +73,7 @@ As an aside, one other positive is that my [latest laptop](/2023/04/new-laptop) 
 
 One challenge that remains is having to switch between different scenes in OBS Studio and also muting and unmuting the mics. Something like an [Elgato Stream deck](https://www.amazon.com.au/Elgato-Stream-Deck-MK-2-Controller/dp/B09738CV2G?th=1&linkCode=ll1&tag=flcdrg07-22&linkId=58ea4a33106107c2dff78ac6cfae404b&language=en_AU&ref_=as_li_ss_tl) might make that easier (instead of needing to alt-tab between OBS and Rode Connect applications).
 
-![Elgato Stream Deck Mark 2](/assets/2024/02/elgato-stream-deck-mk2.jpg)
+![Elgato Stream Deck Mark 2](../../assets/2024/02/elgato-stream-deck-mk2.jpg)
 
 It would also be nice to have a better solution for in-person audience questions. We do have the MXL boundary mic, but a handheld mic would give clearer audio. Something for the wishlist!
 

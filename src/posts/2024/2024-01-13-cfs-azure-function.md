@@ -12,7 +12,7 @@ Twitter (or 'X' as it seems to be called now), to my surprise, hasn't died yet. 
 
 One that is relevant to living in South Australia, especially over the warmer months, given where I live is a bushfire-prone area, is keeping an eye on the updates from the [Country Fire Service](https://cfs.sa.gov.au/home/) (known locally as the CFS). They have a Twitter account, but not a Mastodon account. If only there was a way to get their updates on Mastodon!
 
-![Example CFS Alert posted to Mastodon](/assets/2024/01/cfs-alert.png)
+![Example CFS Alert posted to Mastodon](../../assets/2024/01/cfs-alert.png)
 
 As it turns out, the CFS [publish some RSS feeds](https://cfs.sa.gov.au/warnings-restrictions/warnings/rss-feeds/). My first attempt was to make use of a service like [Mastofeed](https://mastofeed.org), which in theory can take an RSS feed and post updates to Mastodon. But as I discovered, the RSS feed from the CFS has a few oddities that seem to prevent this from working correctly - it posted one update but then stopped. Here's an example of the RSS feed:
 
@@ -160,7 +160,7 @@ To keep costs to a minimum, the Azure Function is running on a consumption plan.
 
 As it turns out, so far the Function is not costing very much at all. It's actually the Storage Account that is the most significant. AUD8.30 so far and the total forecast for the month will be AUD17. An Azure Function needs to be linked to a Storage Account. It would be interesting to see if there are any changes I could make to reduce the cost further.
 
-![Azure cost summary](/assets/2024/01/cfs-azure-costs.png)
+![Azure cost summary](../../assets/2024/01/cfs-azure-costs.png)
 
 To see the latest posts from the Azure Function, you can go to [https://mastodon.online/@CFSAlerts](https://mastodon.online/@CFSAlerts) (and if you're on Mastodon, feel free to follow the account!)
 

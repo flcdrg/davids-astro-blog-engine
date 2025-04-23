@@ -33,7 +33,7 @@ One of the challenges I hit was thinking about the structure that is being gener
 
 The old Blogger structure looked like this (Screenshot from [Internet Archive's Wayback Machine](https://web.archive.org/web/20170219235104/https://david.gardiner.net.au/)):
 
-![Screenshot of blog from 2017](/assets/2025/01/blog-screenshot-2017.jpg)
+![Screenshot of blog from 2017](../../assets/2025/01/blog-screenshot-2017.jpg)
 
 Home page
 
@@ -55,7 +55,7 @@ Individual posts are referenced using the following address format:
 
 #### Jekyll
 
-![Screenshot of current Jekyll-based blog](/assets/2025/01/blog-screenshot-2025.jpg)
+![Screenshot of current Jekyll-based blog](../../assets/2025/01/blog-screenshot-2025.jpg)
 
 Home page
 

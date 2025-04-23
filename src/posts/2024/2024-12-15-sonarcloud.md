@@ -169,11 +169,11 @@ A few things to point out:
 
 And now we can view our code coverage in SonarQube:
 
-![SonarCloud project overview showing code coverage history](/assets/2024/12/coverage-sonarqube1.png)
+![SonarCloud project overview showing code coverage history](../../assets/2024/12/coverage-sonarqube1.png)
 
-![SonarCloud pull request file code coverage summary](/assets/2024/12/coverage-sonarqube2.png)
+![SonarCloud pull request file code coverage summary](../../assets/2024/12/coverage-sonarqube2.png)
 And in Azure Pipelines!
 
-![Azure Pipeline run showing code coverage tab](/assets/2024/12/coverage-azure-pipelines.png)
+![Azure Pipeline run showing code coverage tab](../../assets/2024/12/coverage-azure-pipelines.png)
 
 Check out the example project at [https://dev.azure.com/gardiner/_git/SonarCloudDemo](https://dev.azure.com/gardiner/_git/SonarCloudDemo), and you can view the SonarQube analysis at [https://sonarcloud.io/project/overview?id=Gardiner_SonarCloudDemo](https://sonarcloud.io/project/overview?id=Gardiner_SonarCloudDemo)
