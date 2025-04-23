@@ -13,6 +13,6 @@ To paste Markdown text into Atlassian Confluence wiki:
 1. Use <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>V</kbd> (to paste without formatting)
 2. Click on the Paste Options menu in Confluence and select **Use Markdown** (the default is)
 
-![Confluence's Paste Options menu](/assets/2024/04/confluence-paste-options.png)
+![Confluence's Paste Options menu](../../assets/2024/04/confluence-paste-options.png)
 
 If you prepared your Markdown in Visual Studio Code (as I often do), then the 'paste without format' is important as by default VS Code copies text with a 'plain text/code' formatting flavour, and this means you don't get offered the paste options menu.

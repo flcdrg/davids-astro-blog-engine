@@ -8,7 +8,7 @@ tags:
 
 _Part 6 in a series on new language features in C# 12._
 
-![C# logo](/assets/2024/03/logo_csharp.png)
+![C# logo](../../assets/2024/03/logo_csharp.png)
 
 ### Inline arrays
 

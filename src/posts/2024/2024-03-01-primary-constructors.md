@@ -8,7 +8,7 @@ tags:
 
 Last month, we had a [".NET 8 Lightning talks" theme for the Adelaide .NET User Group](https://www.meetup.com/adelaide-dotnet/events/298685906/). John covered Blazor, Ryan summarised a bunch of new core library features, and I focused on the 8 new language features added in C# 12. What a great idea for a nice, short blog series!
 
-![C# logo](/assets/2024/03/logo_csharp.png)
+![C# logo](../../assets/2024/03/logo_csharp.png)
 
 ### Primary constructors
 

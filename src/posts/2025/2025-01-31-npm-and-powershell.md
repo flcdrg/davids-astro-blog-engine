@@ -1,13 +1,13 @@
 ---
 title: Passing arguments to npm in PowerShell
 date: '2025-01-31T12:00:00.000+10:30'
-image: npm.png
+image: ../../assets/2025/01/npm.png
 imageAlt: "NPM logo"
 tags:
 - PowerShell
 ---
 
-<!-- ![npm logo](npm.png) -->
+![npm logo](../../assets/2025/01/npm.png)
 
 This just caught me out. I was following [the tutorial for the Astro web framework](https://docs.astro.build/en/tutorial/1-setup/2/) and it contains instructions to run this command:
 
