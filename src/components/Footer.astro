@@ -4,6 +4,9 @@
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faStackOverflow, faGithub, faLinkedin, faMastodon, faBluesky } from "@fortawesome/free-brands-svg-icons";
 import { faRssSquare } from "@fortawesome/free-solid-svg-icons";
+import { Picture } from "astro:assets";
+
+import MVPLogo from "../assets/MVP_Logo_Horizontal_Preferred_Cyan300_RGB_300ppi.png";
 
 // Declare all the icons you plan on using
 library.add(faRssSquare, faStackOverflow, faGithub, faLinkedin, faMastodon, faBluesky);
@@ -27,13 +30,51 @@ const blueskyIcon = icon({ prefix: "fab", iconName: faBluesky.iconName });
       <li><a rel="me" href="https://mastodon.online/@DavidRGardiner" title="Mastodon"><Fragment set:html={mastodonIcon.html} /></a></li>
       <li><a rel="me" href="https://bsky.app/profile/david.gardiner.net.au" title="Bluesky"><Fragment set:html={blueskyIcon.html} /></a></li>
     </ul>
+
+    <div class="centered-content">
+      <div class="mvp-logo">
+        <a href="https://mvp.microsoft.com/en-US/MVP/profile/04080298-ff57-e511-8102-fc15b4282e38"><Picture src={MVPLogo} alt="Microsoft MVP Logo" width="300" height="121" loading="lazy" decoding="async" /></a>
+      </div>
+
+      <div id="copyright" is:raw>
+        <p xmlns:cc='http://creativecommons.org/ns#' xmlns:dct='http://purl.org/dc/terms/'>&copy; David Gardiner. <a property='dct:title' rel='cc:attributionURL' href='https://david.gardiner.net.au'>This blog</a> by <a rel='cc:attributionURL dct:creator' property='cc:attributionName' href='https://david.gardiner.net.au/about'>David Gardiner</a> is licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1' target='_blank' rel='license noopener noreferrer' style='display:inline-block;'>CC BY-NC-SA 4.0<img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1' alt=''><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1' alt=''><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1' alt=''><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1' alt=''></a></p>  
+      </div>
+    </div>
 </footer>
 
 <style>
   footer {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     margin-top: 2rem;
+  }
+
+  .social-media-list {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .mvp-logo {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #copyright {
+    margin-top: 0.5rem;
   }
 </style>
 
