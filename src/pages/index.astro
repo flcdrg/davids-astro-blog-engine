@@ -16,6 +16,8 @@ const allPosts = (await getCollection("blog"))
 
 ---
 <BaseLayout pageTitle={pageTitle}>
+  <link rel="sitemap" href="/sitemap-index.xml" slot="head" />
+  
   <p>Recent posts:</p>
 
     {
