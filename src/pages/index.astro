@@ -5,9 +5,12 @@ import BlogPost from '../components/BlogPost.astro';
 import BlogPostExcerpt from '../components/BlogPostExcerpt.astro';
 import CustomImage from '../components/CustomImage.astro';
 import DateTimeComponent from '../components/DateTimeComponent.astro';
+import onlyCurrent from '../scripts/filters';
+
 const pageTitle = "David Gardiner";
 
 const allPosts = (await getCollection("blog"))
+  .filter(onlyCurrent)
   .sort(
     (a: any, b: any) =>
       new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()

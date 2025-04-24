@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import onlyCurrent from "../../scripts/filters";
 const pageTitle = "Tags";
-const allPosts = await getCollection("blog");
+const allPosts = (await getCollection("blog")).filter(onlyCurrent);
 
 // Collate all tags from all posts and count posts per tag
 const tagCounts = allPosts
@@ -12,22 +13,26 @@ const tagCounts = allPosts
     return acc;
   }, {});
 
-const tags = Object.entries(tagCounts).sort(([tagA], [tagB]) => tagA.localeCompare(tagB));
+const tags = Object.entries(tagCounts).sort(([tagA], [tagB]) =>
+  tagA.localeCompare(tagB)
+);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="tags">
-    {tags.map(([tag, count]) => (
-      <p class="tag">
-        <a href={`/tags/${tag}`}>{tag}</a> ({count})
-      </p>
-    ))}
+    {
+      tags.map(([tag, count]) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>{tag}</a> ({count})
+        </p>
+      ))
+    }
   </div>
 </BaseLayout>
 
 <style>
   a {
-    color: #00539F;
+    color: #00539f;
   }
 
   .tags {
@@ -38,9 +43,9 @@ const tags = Object.entries(tagCounts).sort(([tagA], [tagB]) => tagA.localeCompa
   .tag {
     margin: 0.25em;
     border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
     font-size: 1.15em;
-    background-color: #F8FCFD;
+    background-color: #f8fcfd;
   }
 </style>

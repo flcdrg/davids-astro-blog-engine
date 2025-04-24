@@ -7,9 +7,15 @@ import type {
   InferGetStaticPropsType,
   GetStaticPaths,
 } from "astro";
+import onlyCurrent from "../scripts/filters";
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection("blog");
+  const posts = (await getCollection("blog"))
+    .filter(onlyCurrent)
+    .sort((a, b) => {
+      return DateTime.fromISO(a.data.date).toMillis() -
+        DateTime.fromISO(b.data.date).toMillis();
+    });
 
   return posts.map((post) => {
 

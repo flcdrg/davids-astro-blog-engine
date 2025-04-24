@@ -1,28 +1,35 @@
 ---
-import BlogPost from '../../components/BlogPost.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPost from "../../components/BlogPost.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import DateTimeComponent from '../../components/DateTimeComponent.astro';
+import DateTimeComponent from "../../components/DateTimeComponent.astro";
 
 import type {
   InferGetStaticParamsType,
   InferGetStaticPropsType,
   GetStaticPaths,
 } from "astro";
+import onlyCurrent from "../../scripts/filters";
 
-export const getStaticPaths = (async () =>{
-    const allPosts = await getCollection("blog");
+export const getStaticPaths = (async () => {
+  const allPosts = (await getCollection("blog")).filter(onlyCurrent);
 
-    const uniqueTags = [...new Set(allPosts.map((post: any) => post.data.tags).flat())];
+  const uniqueTags = [
+    ...new Set(allPosts.map((post: any) => post.data.tags).flat()),
+  ];
 
-    return uniqueTags.map((tag) => {
-  const filteredPosts = allPosts.filter((post: any) => post.data.tags.includes(tag))
-    .sort((a: any, b: any) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-  return {
-    params: { tag },
-    props: { posts: filteredPosts },
-  };
-});
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts
+      .filter((post: any) => post.data.tags.includes(tag))
+      .sort(
+        (a: any, b: any) =>
+          new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+      );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
 }) satisfies GetStaticPaths;
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
@@ -31,9 +38,17 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { tag } = Astro.params as Params;
 const { posts } = Astro.props as Props;
 ---
+
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
   <ul>
-    {posts.map((post: any) => <li><BlogPost url={`/${post.id}`} title={post.data.title} /> (<DateTimeComponent date={post.data.date} />)</li>)}
+    {
+      posts.map((post: any) => (
+        <li>
+          <BlogPost url={`/${post.id}`} title={post.data.title} /> (
+          <DateTimeComponent date={post.data.date} />)
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>

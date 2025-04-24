@@ -4,6 +4,7 @@ import sanitizeHtml from "sanitize-html";
 import MarkdownIt from "markdown-it";
 import type { APIContext } from "astro";
 import getExcerpt from "../scripts/getExcerpt";
+import onlyCurrent from "../scripts/filters";
 const parser = new MarkdownIt();
 
 function fixImageLinks(html: string) {
@@ -16,7 +17,7 @@ function fixImageLinks(html: string) {
 }
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection("blog");
+  const posts = (await getCollection("blog")).filter(onlyCurrent);
 
   const sortedPosts = posts.sort(
     (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
@@ -60,14 +61,13 @@ export async function GET(context: APIContext) {
     ],
     lang: "en-AU",
     entry: postsToInclude.map((post) => {
-
       const htmlContent = fixImageLinks(
         sanitizeHtml(parser.render(post.body || ""), {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
         })
       );
 
-      return ({
+      return {
         id: `${new URL(post.id, context.site).toString()}`,
         updated: post.data.date,
         published: post.data.date,
@@ -93,10 +93,10 @@ export async function GET(context: APIContext) {
         ],
         thumbnail: post.data.image
           ? {
-            url: `${new URL(post.data.image.src, context.site).toString()}`,
-          }
+              url: `${new URL(post.data.image.src, context.site).toString()}`,
+            }
           : undefined,
-      });
+      };
     }),
   });
 }
