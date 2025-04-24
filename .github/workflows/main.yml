@@ -1,0 +1,145 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Automatically execute this workflow on a schedule.
+  schedule:
+    # POSIX-compatible cron syntax is supported.
+    - cron: "0 0 * * *" # Rebuild once a day.
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  id-token: write
+  deployments: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: .astro
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+            ${{ runner.os }}-pnpm
+
+      - name: Setup dist cache
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-dist-${{ hashFiles('pnpm-lock.yaml') }}
+            ${{ runner.os }}-dist
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.1.0
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
+
+      - run: pnpm install
+
+      # PR builds use dev mode
+      - name: Build PR
+        if: github.event_name == 'pull_request'
+        run: pnpm build --devOutput
+
+      # Regular production build (for non-PR builds)
+      - name: Build
+        if: github.event_name == 'push'
+        run: pnpm build
+
+      # PR builds push to Netlify
+      - name: Deploy PR build to Netlify
+        if: github.event_name == 'pull_request'
+        run: |
+          pnpm exec netlify deploy --dir=dist --json > deploy.json
+          cat deploy.json
+
+          # Post deploy_url to PR comment
+          deploy_url=$(jq -r '.deploy_url' deploy.json)
+
+          # Post PR comment with deploy_url
+          gh pr comment ${{ github.event.pull_request.number }} --body "Preview URL: $deploy_url"
+
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+          GH_TOKEN: ${{ github.token }}
+
+      # Push to Netlify if not a PR build and this is the astro-blog-engine repo
+      - name: Publish to Netlify
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.action_repository == 'flcdrg/astro-blog-engine'
+        run: |
+          pnpm exec netlify deploy --dir=dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+
+      # Push to Cloudflare Pages if not a PR build and this is not the astro-blog-engine repo
+      - name: Publish to Cloudflare Pages
+        uses: The-Noah/pages-action@v1.0.2
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.action_repository != 'flcdrg/astro-blog-engine'
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: blog
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  update_readme:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Update GitHub Profile Readme
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.action_repository != 'flcdrg/astro-blog-engine'
+
+    steps:
+      - name: Workflow Dispatch
+        uses: benc-uk/workflow-dispatch@v1.2.4
+        with:
+          workflow: Update
+          ref: ${{ github.event.ref }}
+          repo: flcdrg/flcdrg
+          token: ${{ secrets.GH_PAGES_TOKEN }}
+
+  feedburner:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Notify Feedburner
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.action_repository != 'flcdrg/astro-blog-engine'
+
+    # ignore errors as sometimes this fails
+    continue-on-error: true
+    steps:
+      - run: |
+          curl -X POST -F 'url=https://feeds.feedburner.com/DavesDaydreams' http://feedburner-pinger.herokuapp.com
+        name: Ping
