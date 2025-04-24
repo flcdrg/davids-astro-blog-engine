@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 const blog = defineCollection({
   type: "content_layer",
   loader: glob({ 
-    pattern: "**/*.md", 
+    pattern: "**/*.{md,mdx}", 
     base: "./src/posts",
     generateId: ({ entry, data }) => {
       const date = DateTime.fromISO(data.date as string, { setZone: true });
@@ -13,7 +13,7 @@ const blog = defineCollection({
       const id = entry.substring(16);
       const slug = `${date.toFormat("yyyy")}/${date.toFormat("MM")}/${id}`;
 
-      return slug.replace(/\.md$/, '');
+      return slug.replace(/\.mdx?$/, '');
     },
   }),
   schema: ({ image }) =>
