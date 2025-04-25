@@ -262,3 +262,4 @@ jobs:
           lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_COLLECT_MAXAUTODISCOVERURLS: ${{ github.ref != 'refs/heads/main' && 6 || 0 }} # Limit the number of URLs to 5 for PR builds
