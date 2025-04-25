@@ -32,5 +32,8 @@ const { frontmatter } = Astro.props;
   </div>
   <slot />
 
-  <Disqus embed="https://davidgardiner.disqus.com/embed.js" url={Astro.url.toString()} />
+  <Disqus
+    embed="https://davidgardiner.disqus.com/embed.js"
+    url={Astro.url.toString()}
+  />
 </BaseLayout>

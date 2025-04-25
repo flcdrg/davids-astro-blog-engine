@@ -1,7 +1,6 @@
 ---
 layout: ../layouts/BaseLayout.astro
 title: Speaking
-permalink: /speaking/
 ---
 
 Talks and presentations I have given:
