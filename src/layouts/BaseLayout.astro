@@ -1,9 +1,19 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-const { pageTitle } = Astro.props;
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  pageTitle?: string;
+  frontmatter?: {
+    title?: string;
+    description?: string;
+  };
+}
+
+const { pageTitle, frontmatter } = Astro.props;
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -11,7 +21,11 @@ const { pageTitle } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <slot name="head" />
-    <title>{pageTitle}</title>
+    <title>{pageTitle || frontmatter?.title}</title>
+    {frontmatter?.description && (
+      <meta name="description" content={frontmatter.description} />
+    )}
+    
   </head>
   <body>
     <Header />

@@ -95,7 +95,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
@@ -148,9 +148,11 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
 
+  # We want this to run in this repo as well as the blog repo, so we only depend on 'build'
+  # and not 'publish_to_netlify'.
   clean_netlify:
     runs-on: ubuntu-latest
-    needs: publish_to_netlify
+    needs: build
     name: Clean Netlify Deploys
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -223,3 +225,35 @@ jobs:
       - run: |
           curl -X POST -F 'url=https://feeds.feedburner.com/DavesDaydreams' http://feedburner-pinger.herokuapp.com
         name: Ping
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Lighthouse Report
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Install Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: run Lighthouse CI
+        run: |
+          # Robots.txt defaults to disallow, which is not what we want for the lighthouse test
+          rm dist/robots.txt
+
+          npm install -g @lhci/cli@0.14.x
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
