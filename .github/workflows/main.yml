@@ -105,7 +105,7 @@ jobs:
       - name: Publish to Netlify
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'flcdrg/astro-blog-engine'
         run: |
-          pnpm exec netlify deploy --dir=dist
+          pnpm exec netlify deploy --prod --dir=dist
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
