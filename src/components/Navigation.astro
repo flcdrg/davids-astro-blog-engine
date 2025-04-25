@@ -1,6 +1,5 @@
 ---
 import ThemeIcon from "./ThemeIcon.astro";
-
 ---
 
 <div class="nav-container">
@@ -12,15 +11,19 @@ import ThemeIcon from "./ThemeIcon.astro";
       height="80"
     />
     <div class="site-title">
-      <div>
-        David Gardiner
-      </div>
+      <div>David Gardiner</div>
       <div class="site-subtitle">
         A blog of software development, .NET and other interesting things
       </div>
     </div>
   </div>
-  
+
+  <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
   <div class="nav-links">
     <a href="/">Home</a>
     <a href="/tags/">Tags</a>
@@ -28,8 +31,175 @@ import ThemeIcon from "./ThemeIcon.astro";
     <a href="/about/">About</a>
     <a href="/speaking/">Speaking</a>
     <ThemeIcon />
-
+  </div>
 </div>
 
+<style>
+  /* Base styles for the navigation container */
+  .nav-container {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping in desktop view */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+  }
 
-</div>
+  /* Profile section styles */
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0; /* Prevent profile from shrinking */
+    max-width: 60%; /* Limit profile width on larger screens */
+  }
+
+  .profile img {
+    border-radius: 50%;
+  }
+
+  .site-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 100%; /* Take full width of parent */
+  }
+
+  .site-subtitle {
+    font-size: clamp(0.7rem, 1vw, 0.8rem); /* Responsive font size */
+    font-weight: normal;
+    color: #666;
+    width: 100%; /* Take full width of parent */
+    overflow-wrap: break-word; /* Ensure text wraps properly */
+  }
+
+  /* Navigation links styles */
+  .nav-links {
+    display: flex;
+    gap: clamp(0.5rem, 1vw, 1rem); /* Responsive gap */
+    align-items: center; /* Center vertically with profile */
+    margin-left: auto; /* Push to right side */
+    flex-wrap: nowrap; /* Prevent wrapping to keep items on same row */
+    justify-content: flex-end; /* Align to the right */
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: clamp(0.9rem, 1vw, 1rem); /* Responsive font size */
+    white-space: nowrap; /* Prevent text from wrapping */
+    padding: 0 clamp(0.2rem, 0.5vw, 0.5rem); /* Responsive horizontal padding */
+  }
+
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hamburger menu button - hidden by default */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .hamburger-line {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-color, #000);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Mobile styles - screen width less than 768px */
+  @media (max-width: 768px) {
+    .nav-container {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%; /* Ensure container takes full width */
+    }
+
+    /* Show hamburger button on mobile */
+    .hamburger {
+      display: flex;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    /* Hide nav links by default on mobile */
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem 0;
+      background-color: var(--bg-color, #fff);
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Show nav links when active class is present */
+    .nav-links.active {
+      display: flex;
+    }
+
+    /* Add some spacing to nav links in mobile view */
+    .nav-links a {
+      padding: 0.5rem 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Execute immediately without waiting for DOMContentLoaded
+  (function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function(e) {
+        e.preventDefault();
+        navLinks.classList.toggle('active');
+        
+        const isExpanded = navLinks.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        
+        const hamburgerLines = hamburger.querySelectorAll('.hamburger-line');
+        if (isExpanded) {
+          (hamburgerLines[0] as HTMLElement).style.transform = 'rotate(45deg) translate(5px, 5px)';
+          (hamburgerLines[1] as HTMLElement).style.opacity = '0';
+          (hamburgerLines[2] as HTMLElement).style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+          (hamburgerLines[0] as HTMLElement).style.transform = 'none';
+          (hamburgerLines[1] as HTMLElement).style.opacity = '1';
+          (hamburgerLines[2] as HTMLElement).style.transform = 'none';
+        }
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (hamburger && 
+            !hamburger.contains(event.target as Node) && 
+            !navLinks.contains(event.target as Node) && 
+            navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          
+          const hamburgerLines = hamburger.querySelectorAll('.hamburger-line');
+          (hamburgerLines[0] as HTMLElement).style.transform = 'none';
+          (hamburgerLines[1] as HTMLElement).style.opacity = '1';
+          (hamburgerLines[2] as HTMLElement).style.transform = 'none';
+        }
+      });
+    }
+  })();
+</script>
