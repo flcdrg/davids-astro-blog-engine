@@ -40,6 +40,9 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { year } = Astro.params as Params;
 const { posts } = Astro.props as Props;
 const pageTitle = `Posts from ${year}`;
+const frontmatter = {
+  description: `Summary list of posts from the year ${year}`,
+};
 
 function formatDateWithSuffix(dateString: string) {
   const date = DateTime.fromISO(dateString);
@@ -56,7 +59,7 @@ function formatDateWithSuffix(dateString: string) {
 }
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} frontmatter={frontmatter}>
   <h1>{year}</h1>
 
   <ul class="list-none">

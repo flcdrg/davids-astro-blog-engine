@@ -64,8 +64,14 @@ const blueskyIcon = icon({ prefix: "fab", iconName: faBluesky.iconName });
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 800px;
     margin: 0 auto;
+  }
+
+  @media screen and (min-width: 636px) {
+    .centered-content {
+    display: flex;
+    max-width: 800px;
+  }
   }
 
   .mvp-logo {
