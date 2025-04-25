@@ -21,11 +21,6 @@ permissions:
   pull-requests: write # Required for PR comments
   deployments: write # Required for Cloudflare Pages
 
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -131,6 +126,11 @@ jobs:
     name: Publish to Netlify
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'flcdrg/astro-blog-engine'
 
+    # Allow one concurrent deployment
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
     steps:
       - name: Download dist artifact
         uses: actions/download-artifact@v4
@@ -180,6 +180,11 @@ jobs:
     needs: build
     name: Publish to Cloudflare Pages
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository != 'flcdrg/astro-blog-engine'
+
+    # Allow one concurrent deployment
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
 
     steps:
       - name: Download dist artifact
