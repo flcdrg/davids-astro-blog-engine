@@ -18,7 +18,8 @@ on:
 permissions:
   contents: read
   id-token: write
-  deployments: write
+  pull-requests: write # Required for PR comments
+  deployments: write # Required for Cloudflare Pages
 
 # Allow one concurrent deployment
 concurrency:
@@ -26,13 +27,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-      pull-requests: write
 
     steps:
       - name: Dump GitHub context
@@ -83,11 +79,38 @@ jobs:
         if: github.event_name == 'push'
         run: pnpm build
 
-      # PR builds push to Netlify
+      # dist as artifact
+      - name: Upload dist as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+  publish_to_netlify_pr:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Publish PR to Netlify
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: List files in dist
+        run: ls -alR dist
+
+      - name: Install Netlify CLI
+        run: npm install netlify-cli -g
+
       - name: Deploy PR build to Netlify
-        if: github.event_name == 'pull_request'
         run: |
-          pnpm exec netlify deploy --dir=dist --json > deploy.json
+          netlify deploy --dir=dist --json --message "${{ github.event.pull_request.head.title }}" > deploy.json
           cat deploy.json
 
           # Post deploy_url to PR comment
@@ -101,19 +124,71 @@ jobs:
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
           GH_TOKEN: ${{ github.token }}
 
-      # Push to Netlify if not a PR build and this is the astro-blog-engine repo
+  # Push to Netlify if not a PR build and this is the astro-blog-engine repo
+  publish_to_netlify:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Publish to Netlify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'flcdrg/astro-blog-engine'
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Install Netlify CLI
+        run: npm install netlify-cli -g
+
       - name: Publish to Netlify
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'flcdrg/astro-blog-engine'
         run: |
-          pnpm exec netlify deploy --prod --dir=dist
+          netlify deploy --prod --dir=dist --message "${{ github.event.head_commit.message }}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
 
+  clean_netlify:
+    runs-on: ubuntu-latest
+    needs: publish_to_netlify
+    name: Clean Netlify Deploys
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Install Netlify CLI
+        run: npm install netlify-cli -g
+
+      - name: Clean Netlify Deploy previews
+        run: |
+          $listData = @{ site_id = $env:NETLIFY_SITE_ID } | ConvertTo-Json
+          $json = netlify api listSiteDeploys --data $listData | ConvertFrom-Json
+          $json | Sort-Object -Property id -Descending | Where-Object { $_.context -eq "deploy-preview" } | ForEach-Object {
+              $deleteData = @{ site_id = $env:NETLIFY_SITE_ID; deploy_id = $_.id } | ConvertTo-Json
+              Write-Host "Deleting deploy preview: $($_.id)"
+              netlify api deleteSiteDeploy --data $deleteData
+          }
+
+        shell: pwsh
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
+
+  publish_to_cloudflare:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Publish to Cloudflare Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository != 'flcdrg/astro-blog-engine'
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
       # Push to Cloudflare Pages if not a PR build and this is not the astro-blog-engine repo
       - name: Publish to Cloudflare Pages
         uses: The-Noah/pages-action@v1.0.2
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository != 'flcdrg/astro-blog-engine'
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -123,7 +198,7 @@ jobs:
 
   update_readme:
     runs-on: ubuntu-latest
-    needs: build
+    needs: publish_to_cloudflare
     name: Update GitHub Profile Readme
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository != 'flcdrg/astro-blog-engine'
 
@@ -138,7 +213,7 @@ jobs:
 
   feedburner:
     runs-on: ubuntu-latest
-    needs: build
+    needs: publish_to_cloudflare
     name: Notify Feedburner
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository != 'flcdrg/astro-blog-engine'
 
