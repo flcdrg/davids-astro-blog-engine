@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import getPostsByGroupCondition from "../../scripts/getPostsByGroupCondition";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import getPostsByGroupCondition from "../scripts/getPostsByGroupCondition";
 import { DateTime } from "luxon";
-import onlyCurrent from "../../scripts/filters";
+import onlyCurrent from "../scripts/filters";
 
 const pageTitle = "Archive";
 
@@ -11,6 +11,8 @@ const posts = (await getCollection("blog")).filter(onlyCurrent);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
+  <link rel="canonical" href={new URL(Astro.url, Astro.site)} slot="head" />
+
   <h1>Posts by year</h1>
   <ul>
     {
