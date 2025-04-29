@@ -19,13 +19,13 @@ const tags = Object.entries(tagCounts).sort(([tagA], [tagB]) =>
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} slot="head" />
+  <link rel="canonical" href={new URL(Astro.url.pathname.replace(".html", ""), Astro.site)} slot="head" />
 
   <div class="tags">
     {
       tags.map(([tag, count]) => (
         <p class="tag">
-          <a href={`/tags/${tag}.html`}>{tag}</a> ({count})
+          <a href={`/tags/${tag}`}>{tag}</a> ({count})
         </p>
       ))
     }

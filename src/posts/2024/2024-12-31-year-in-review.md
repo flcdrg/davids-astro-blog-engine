@@ -24,9 +24,9 @@ I've been focusing a lot on "DevOps" kinds of things lately. I honestly prefer n
 
 ### Professional things
 
-I was able to [attend the Microsoft MVP Summit](/2024/03/mvp-summit-2024.html) in person over in Redmond for the first time since the pandemic. A definite privilege to be there, and I still get a huge kick out of visiting a different culture (and while there are similarities, there's also enough differences between Australia and the USA to be interesting).
+I was able to [attend the Microsoft MVP Summit](/2024/03/mvp-summit-2024) in person over in Redmond for the first time since the pandemic. A definite privilege to be there, and I still get a huge kick out of visiting a different culture (and while there are similarities, there's also enough differences between Australia and the USA to be interesting).
 
-We ran the [DDD Adelaide](/2024/11/ddd-adelaide-2024.html) conference, and I think that was pretty successful. And then two weeks later I got to speak and help out at [DDD Brisbane](/2024/12/ddd-brisbane.html). That was a real bonus.
+We ran the [DDD Adelaide](/2024/11/ddd-adelaide-2024) conference, and I think that was pretty successful. And then two weeks later I got to speak and help out at [DDD Brisbane](/2024/12/ddd-brisbane). That was a real bonus.
 
 The [Adelaide .NET User Group](https://www.adnug.net) met regularly throughout the year. It's been great having a team helping organise this with me too.
 
@@ -38,13 +38,13 @@ I left X/Twitter. I'd stopped using it for quite a few months and didn't really 
 
 ### Technology things
 
-That [Apple TV I got the family for Christmas 2023](/2023/12/apple-tv-4k.html) turned out to be quite a hit. I think at first there was a bit of "what's the point of this?" but it has just become the most common way we watch TV now by all members of the family.
+That [Apple TV I got the family for Christmas 2023](/2023/12/apple-tv-4k) turned out to be quite a hit. I think at first there was a bit of "what's the point of this?" but it has just become the most common way we watch TV now by all members of the family.
 
-The [Synology NAS](/2024/02/wd-red-nas.html) is just a really useful thing. The backup features came into their own when my parents were travelling overseas and managed to lose a bunch of contacts from their email account. Because I had backups configured I was able to restore the contacts for them.
+The [Synology NAS](/2024/02/wd-red-nas) is just a really useful thing. The backup features came into their own when my parents were travelling overseas and managed to lose a bunch of contacts from their email account. Because I had backups configured I was able to restore the contacts for them.
 
-I think we've finally found a working combination of bits to enable us to [record and live stream our ADNUG meetups](/2024/02/streaming-struggles.html). It's taken a while, and if there was a single device I could use to replace all the separate things plugged into my laptop, that would make it so much easier, but I haven't found that yet (and I suspect it wouldn't be cheap).
+I think we've finally found a working combination of bits to enable us to [record and live stream our ADNUG meetups](/2024/02/streaming-struggles). It's taken a while, and if there was a single device I could use to replace all the separate things plugged into my laptop, that would make it so much easier, but I haven't found that yet (and I suspect it wouldn't be cheap).
 
-My laptop has been behaving itself since those [overheating issues](/2024/02/hot-laptop.html) earlier in the year. I've been pretty loyal to Dell in the past, but those kind of reliability issues have raised some questions in my mind. I'll be taking a very close look at the [Framework](https://frame.work/au/en) for my next hardware refresh to see how it compares.
+My laptop has been behaving itself since those [overheating issues](/2024/02/hot-laptop) earlier in the year. I've been pretty loyal to Dell in the past, but those kind of reliability issues have raised some questions in my mind. I'll be taking a very close look at the [Framework](https://frame.work/au/en) for my next hardware refresh to see how it compares.
 
 ### Personal things
 

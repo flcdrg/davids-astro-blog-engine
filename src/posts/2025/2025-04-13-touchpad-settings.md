@@ -9,7 +9,7 @@ tags:
 - Windows 11
 ---
 
-Now that I've got [a reliable process for reinstalling Windows](/2025/04/reinstalling-laptop.html), I do have a list of things that I'd like to automate to get it configured "just right". As such, I've created a new repository on GitHub and [added issues to track each one of these](https://github.com/flcdrg/reinstall-windows/issues). While my [Boxstarter scripts](https://gist.github.com/flcdrg/87802af4c92527eb8a30) will remain for now as GitHub Gists, I think it's going to be easier to manage all of these things together in the one [Git repository](https://github.com/flcdrg/reinstall-windows).
+Now that I've got [a reliable process for reinstalling Windows](/2025/04/reinstalling-laptop), I do have a list of things that I'd like to automate to get it configured "just right". As such, I've created a new repository on GitHub and [added issues to track each one of these](https://github.com/flcdrg/reinstall-windows/issues). While my [Boxstarter scripts](https://gist.github.com/flcdrg/87802af4c92527eb8a30) will remain for now as GitHub Gists, I think it's going to be easier to manage all of these things together in the one [Git repository](https://github.com/flcdrg/reinstall-windows).
 
 One customisation I like to make to Windows is to disable the 'Tap with a single finger to single-click' for the touchpad. I find I'm less likely to accidentally click on something when I was just tapping the touch pad to move the cursor if I turn this off.
 

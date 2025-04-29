@@ -7,7 +7,7 @@ tags:
 - Synology
 ---
 
-It hasn't all been smooth sailing with my [new laptop](/2023/04/new-laptop.html). I had some stability issues last year where it was blue screening, and when it restarted the NVidia GPU was not present in the Device Manager (or Task Manager). After a few attempts with Dell Support replacing parts, it eventually started behaving again.
+It hasn't all been smooth sailing with my [new laptop](/2023/04/new-laptop). I had some stability issues last year where it was blue screening, and when it restarted the NVidia GPU was not present in the Device Manager (or Task Manager). After a few attempts with Dell Support replacing parts, it eventually started behaving again.
 
 Then a couple of weeks ago, I had a notification popup on my laptop. The Dell 'SupportAssist' app had noticed the fan had failed a couple of times recently. I was surprised, as I hadn't noticed any issues. I contacted Dell Support and they asked me to run the firmware-level SupportAssist diagnostic. Sure enough, it said there was an issue with a 'SKIN' sensor reading 'is lower than expected'. I'm not sure exactly what that is, but I did find a mention of the Error Code "2000-0315" on [this page](https://www.dell.com/support/kbdoc/en-au/000181167/reference-table-of-epsa-psa-error-codes-and-troubleshooting-steps-2000-0nnn-series).
 
@@ -37,7 +37,7 @@ I don't think there's a way around this error. Retry gave the same error and 'Sk
 
 I did happen to have a second local account on the machine, but it isn't an admin account. I could sign in successfully with that account, but not switch to my Microsoft Account. I think I'm looking at a complete reinstall. I wasn't overly worried by this as I know anything important is already synced in OneDrive. I also make use of the Synology Active Business Backup to backup all our computers at home, so I was confident I'd also have a full backup image of the machine that I could get any files from if needed.
 
-Before paving the machine, I wisely checked the [Synology backup](/2021/04/synology-DS1621xs-review.html) status. I currently choose to only run the Synology on the weekends (to save power and $$), so that does also mean backups can only happen on the weekend. I was surprised to find that the last backup was from mid-January!
+Before paving the machine, I wisely checked the [Synology backup](/2021/04/synology-DS1621xs-review) status. I currently choose to only run the Synology on the weekends (to save power and $$), so that does also mean backups can only happen on the weekend. I was surprised to find that the last backup was from mid-January!
 
 Pleasingly, the Synology backup agent was already present on the laptop, and I could control that from the Synology management interface to initiate a fresh backup (rather than have to wait for the next scheduled one to start). If you go to the **Task List** panel, then you can right-click on the row for the computer in question and select **Back up**.
 
