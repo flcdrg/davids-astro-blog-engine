@@ -23,8 +23,8 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
     # Assets paths in remaining content
     $updatedContent = $updatedContent -replace "(?<!\.\.)/assets/", "../../assets/"
 
-    # Additional fix to ensure internal page links use .html extension
-    $updatedContent = $updatedContent -replace "\[([^\]]+)\]\((\/\d{4}\/\d{2}\/[\w\d\-]+)\)", '[$1]($2.html)'
+    # Remove .html extension from internal links
+    $updatedContent = $updatedContent -replace "\[([^\]]+)\]\((\/\d{4}\/\d{2}\/[\w\d\-]+)\.html\)", '[$1]($2)'
 
     # Ensure just a single blank line at the end of the file
     $updatedContent = $updatedContent.TrimEnd()

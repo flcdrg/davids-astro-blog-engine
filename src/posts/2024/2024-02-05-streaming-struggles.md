@@ -67,7 +67,7 @@ I'm not sure how the HDMI splitter will go - I fear the multi-screen display mig
 
 The fallback option is to drive the multi-screen display from the streaming laptop's external display. We use OBS Studio for streaming so the idea would be to map the output preview to the external display. In this way, the room display will have a constant signal, and in theory, we can switch input laptops without annoying the room display.
 
-As an aside, one other positive is that my [latest laptop](/2023/04/new-laptop.html) does work correctly with the Rode mics.
+As an aside, one other positive is that my [latest laptop](/2023/04/new-laptop) does work correctly with the Rode mics.
 
 ### Future thoughts
 

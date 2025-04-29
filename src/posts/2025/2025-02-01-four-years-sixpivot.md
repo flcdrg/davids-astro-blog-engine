@@ -11,7 +11,7 @@ Another year has passed, and today I clock up 4 years at [SixPivot](https://www.
 
 ![SixPivot logo](../../assets/2024/02/sixpivot-logo.png)
 
-Looking back at [last year's post](/2024/02/three-years-sixpivot.html), I must say it has been a consistent story.
+Looking back at [last year's post](/2024/02/three-years-sixpivot), I must say it has been a consistent story.
 
 I'm still enjoying working from home (and my heart goes out to those unfortunate to work for organisations with short-sighted management who are forcing a return to office for no good reasons other than a) they feel lonely in office themselves, b) they're looking at how much they're paying for empty offices or c) they don't trust their employees and figure if they can't see them in the office then how do they know that they're actually working? (To be clear, I think there are some valid reasons to work in an office, but these are not three of them).
 
