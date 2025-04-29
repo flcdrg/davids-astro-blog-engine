@@ -8,7 +8,7 @@ tags:
 ---
 ![DDD Melbourne 2025 logo](../../assets/2025/02/dddmelbourne-2025.png)
 
-I last attended [DDD Melbourne](https://www.dddmelbourne.com) 9 years ago, [back in 2016](/2016/08/ddd-melbourne-2016). In the intervening time, it has grown roughly twice the size and shifted from a uni campus to the Melbourne Town Hall. As such, I was really pleased to be able to combine a work trip to Melbourne with being able to attend DDD Melbourne 2025 this last Saturday.
+I last attended [DDD Melbourne](https://www.dddmelbourne.com) 9 years ago, [back in 2016](/2016/08/ddd-melbourne-2016.html). In the intervening time, it has grown roughly twice the size and shifted from a uni campus to the Melbourne Town Hall. As such, I was really pleased to be able to combine a work trip to Melbourne with being able to attend DDD Melbourne 2025 this last Saturday.
 
 It was actually seeing what Melbourne had achieved back in 2015/2016 that inspired me to want to reboot DDD in Adelaide, and a few years later we did that with DDD Adelaide. Ironically, I learned a while ago that the original CodeCampSA/DDD Adelaide events were actually the inspiration for some of the other states to run their own events (figuring if Adelaide could do it, then they should too!). Now the inspiration flows back the other way😀
 
