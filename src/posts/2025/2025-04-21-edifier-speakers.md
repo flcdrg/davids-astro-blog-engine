@@ -12,7 +12,7 @@ I quite often like to have music playing in the background when I'm working. [Do
 
 Also worth calling out that this isn't something you can easily do if you work in an office unless you have your own room or you're happy to wear headphones. Kind of funny that earlier in my career I did have my own private office, but later on the transition to open-plan seating came into fashion and I'm not keen on wearing headphones all day so music listening was put on hold. So yeah, another big plus for working from home!
 
-The speakers on my [Dell XPS 9530](/2023/04/new-laptop) are surprisingly good, but I wondered if adding some external speakers might make it even better.
+The speakers on my [Dell XPS 9530](/2023/04/new-laptop.html) are surprisingly good, but I wondered if adding some external speakers might make it even better.
 
 I had accrued some [SixPivot "Good Vibes points"](https://handbook.sixpivot.com.au/perks-and-benefits/rewards-shop), so I thought I'd spend some of those on some new speakers.
 

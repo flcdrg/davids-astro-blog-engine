@@ -12,7 +12,7 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
     $content = Get-Content -Path $filePath -Raw
 
     # Replace the markdown link with the desired HTML link format
-    $updatedContent = $content -replace $pattern, '[$1](/$2/$3/$5)'
+    $updatedContent = $content -replace $pattern, '[$1](/$2/$3/$5.html)'
 
     # Remove the 'layout: post' line
     $updatedContent = $updatedContent -replace "layout: post`r?`n", ""
@@ -22,6 +22,9 @@ Get-ChildItem -Path $directory -Recurse -Filter "*.md" | ForEach-Object {
 
     # Assets paths in remaining content
     $updatedContent = $updatedContent -replace "(?<!\.\.)/assets/", "../../assets/"
+
+    # Additional fix to ensure internal page links use .html extension
+    $updatedContent = $updatedContent -replace "\[([^\]]+)\]\((\/\d{4}\/\d{2}\/[\w\d\-]+)\)", '[$1]($2.html)'
 
     # Ensure just a single blank line at the end of the file
     $updatedContent = $updatedContent.TrimEnd()
