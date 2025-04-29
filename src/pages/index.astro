@@ -31,7 +31,7 @@ const allPosts = (await getCollection("blog"))
     {
       allPosts.map(async (post) => (
         <section>
-          <h2><BlogPost url={post.id + ".html"} title={post.data.title} /></h2>
+          <h2><BlogPost url={post.id} title={post.data.title} /></h2>
 
           <p><DateTimeComponent date={post.data.date} /> </p>
 
@@ -39,13 +39,13 @@ const allPosts = (await getCollection("blog"))
           <CustomImage desktopImgUrl={post.data.image!} alt={post.data.imageAlt} />
           }
           
-          <BlogPostExcerpt body={post.body} length={500} /> <a href={post.id + ".html"}>Read more...</a>
+          <BlogPostExcerpt body={post.body} length={500} /> <a href={post.id}>Read more...</a>
 
           <div style="clear: both" />
 
           <div class="tags">
             {post.data.tags.map((tag: string) => (
-              <p class="tag"><a href={`/tags/${tag}.html`}>{tag}</a></p>
+              <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
             ))}
           </div>
 

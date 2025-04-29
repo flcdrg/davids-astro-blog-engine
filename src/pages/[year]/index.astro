@@ -71,7 +71,7 @@ function formatDateWithSuffix(dateString: string) {
           <time datetime={post.data.date} class="text-gray-500">
             {formatDateWithSuffix(post.data.date)}
           </time>
-          - <a href={`/${post.id}.html`}>{post.data.title}</a>
+          - <a href={`/${post.id}`}>{post.data.title}</a>
         </li>
       ))
     }

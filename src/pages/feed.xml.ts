@@ -68,7 +68,7 @@ export async function GET(context: APIContext) {
       );
 
       return {
-        id: `${new URL(post.id + ".html", context.site).toString()}`,
+        id: `${new URL(post.id, context.site).toString()}`,
         updated: post.data.date,
         published: post.data.date,
         title: post.data.title,
@@ -86,7 +86,7 @@ export async function GET(context: APIContext) {
         link: [
           {
             rel: "alternate",
-            href: new URL(post.id + ".html", context.site).toString(),
+            href: new URL(post.id, context.site).toString(),
             type: "text/html",
             title: post.data.title,
           },

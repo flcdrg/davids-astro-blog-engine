@@ -40,13 +40,13 @@ const { posts } = Astro.props as Props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} slot="head" />
+  <link rel="canonical" href={new URL(Astro.url.pathname.replace(".html", ""), Astro.site)} slot="head" />
   <p>Posts tagged with {tag}</p>
   <ul>
     {
       posts.map((post: any) => (
         <li>
-          <BlogPost url={`/${post.id}.html`} title={post.data.title} /> (
+          <BlogPost url={`/${post.id}`} title={post.data.title} /> (
           <DateTimeComponent date={post.data.date} />)
         </li>
       ))
