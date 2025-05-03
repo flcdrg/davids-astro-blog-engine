@@ -24,6 +24,7 @@ Talks and presentations I have given:
 | 13th November 2019 | .NET Core 3 Publishing | Adelaide .NET User Group | [Event](https://www.meetup.com/Adelaide-dotNET/events/265896189/) |
 | May 2019 | VS2019 Launch | Adelaide .NET User Group | [Event](https://www.meetup.com/adelaide-dotnet/events/258974130) |
 | 14th September 2018 | Put your C#, VB and F# projects and packaging on a diet | .NET Conf 2018 | [Website](https://www.dotnetconf.net/), [Recording](https://www.youtube.com/watch?v=plYzZxhYGzI) |
-| 16th August 2017 | Life is like a Box of Chocolate(y) | NDC Sydney 2017 | [Event](http://ndcsydney.com/) |
+| 16th August 2017 | Life is like a Box of Chocolate(y) | NDC Sydney 2017 | [Event](http://ndcsydney.com/) [Recording](https://youtu.be/sq2mqeIG2I4?si=r_dhH2oYzFORws-J) |
+| 16th June 2017 | Life is like a Box of Chocolate(y) | Adelaide Microsoft IT Pro Community | [Recording](https://vimeo.com/220727340) |
 | 13th August 2016 | 10 tools and libraries to enhance .NET Unit Testing | DDD Melbourne 2016 | [Event](https://web.archive.org/web/20160724204149/http://www.dddmelbourne.com/agenda) |
 | 8th August 2015 | 10+ unusual tips & tricks for .NET | DDD Melbourne 6 | [Event](https://web.archive.org/web/20150702151508/http://www.dddmelbourne.com:80/agenda) |
