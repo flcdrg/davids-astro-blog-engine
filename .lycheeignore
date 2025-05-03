@@ -1,0 +1,6 @@
+^https://www.linkedin.com/.*
+^https://www\.linkedin\.com/.*
+^https://www\.facebook\.com/.*
+^https://marketplace\.visualstudio\.com/.*
+^https://dev\.azure\.com/*
+^https://web\.archive\.org/*
