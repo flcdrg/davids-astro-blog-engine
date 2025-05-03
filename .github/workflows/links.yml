@@ -5,14 +5,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write # Required for PR comments
 
 jobs:
   generate_report:
     runs-on: ubuntu-latest
-    name: Generate Link Report
+    name: Generate Wayback Links PR
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download Latest Artifact
         uses: dawidd6/action-download-artifact@v9
         with:
@@ -24,4 +27,29 @@ jobs:
           check_artifacts: true
           search_artifacts: true
           if_no_artifact_found: fail
-          
+
+      - name: Wayback Machine Query
+        uses: flcdrg/wayback-machine-query-action@v4
+        id: wayback
+        with:
+          source-path: ./artifacts/output.json
+          timestamp-regex: '_posts\/(\d+)\/(?<year>\d+)-(?<month>\d+)-(?<day>\d+)-'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: replacements
+          path: ./wayback/replacements.json
+
+      - name: Replacements
+        uses: flcdrg/replace-multiple-action@v2
+        with:
+          files: "_posts/**/*.md"
+          find: ${{ steps.wayback.outputs.replacements }}
+          prefix: '(^|\s+|\()'
+          suffix: '($|\s+|\))'
+
+      - name: Create Pull Request
+        # if: ${{ github.ref == 'refs/heads/main' }}
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          title: "Fix broken links using archive.org snapshots"
