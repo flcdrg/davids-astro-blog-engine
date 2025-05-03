@@ -1,0 +1,27 @@
+name: Links
+
+# This workflow can be triggered manually
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate_report:
+    runs-on: ubuntu-latest
+    name: Generate Link Report
+
+    steps:
+      - name: Download Latest Artifact
+        uses: dawidd6/action-download-artifact@v9
+        with:
+          name: link-checker-results
+          workflow: main.yml
+          #branch: main
+          path: ./artifacts
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          check_artifacts: true
+          search_artifacts: true
+          if_no_artifact_found: fail
+          

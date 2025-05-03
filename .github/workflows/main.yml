@@ -270,6 +270,9 @@ jobs:
     needs: build
     name: Link Checker
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       # Cache lychee results (e.g. to avoid hitting rate limits)
       - name: Restore lychee cache
         uses: actions/cache@v4
@@ -289,21 +292,24 @@ jobs:
         uses: lycheeverse/lychee-action@v2.3.0 # 2.4.0 has a bug. Don't upgrade until fixed
         with:
           fail: false
-          output: ${{ github.workspace }}/output.md
-          args: --root-dir "$(pwd)/dist/" './**/*.html' --max-retries 0 --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" --fallback-extensions html --exclude www.linkedin.com
-        env:
-          # to be used in GH case rate limits are surpassed
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          output: ${{ github.workspace }}/output.json
+          format: json
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          args: --root-dir "$(pwd)/dist/" 'dist/**/*.html' --max-retries 0 --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0" --fallback-extensions html -v
 
       - name: Report results
         run: |
-          pwd
-          ls -alR
-          echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
-          cat output.md >> $GITHUB_STEP_SUMMARY
+          ./Generate-LycheeReport.ps1 -InputJsonFile output.json -OutputMarkdownFile output.md
+
+          ls -al
+
+          cat output.md
+
+          cat output.md >> $env:GITHUB_STEP_SUMMARY
+        shell: pwsh
 
       - name: Publish results
         uses: actions/upload-artifact@v4
         with:
           name: link-checker-results
-          path: output.md
+          path: output.*
