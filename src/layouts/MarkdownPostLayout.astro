@@ -16,6 +16,10 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout pageTitle={frontmatter.title}>
   <slot name="head" slot="head" />
+  {frontmatter.description && (
+    <meta name="description" content={frontmatter.description} slot="head" />
+  )}
+  
   
   <h1>{frontmatter.title}</h1>
 
