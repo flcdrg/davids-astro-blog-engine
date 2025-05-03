@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Files from broken link detection
+artifacts/output.json
+artifacts/output.md
+wayback/replacements.json
