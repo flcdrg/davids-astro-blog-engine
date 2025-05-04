@@ -30,3 +30,4 @@ pnpm-debug.log*
 artifacts/output.json
 artifacts/output.md
 wayback/replacements.json
+.lycheecache
