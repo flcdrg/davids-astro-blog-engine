@@ -1,4 +1,4 @@
-name: Links
+name: Submit all Wayback Links
 
 # This workflow can be triggered manually
 on:
@@ -24,9 +24,11 @@ jobs:
 
       - name: Filter JSON
         run: |
-          $urls = ((get-content ./artifacts/output.json | ConvertFrom-Json).success_map.PSObject.properties.Value | 
-            Select-Object -ExpandProperty url | 
-            Sort-Object -Unique) -join " "
+          $rawUrls = (get-content ./artifacts/output.json | ConvertFrom-Json).success_map.PSObject.properties.Value | Select-Object -ExpandProperty url | Sort-Object -Unique
+
+          $rawUrls
+
+          $urls = ($rawUrls | Where-Object { $_.StartsWith("http") -and -not $_.Contains("web.archive.org") } ) -join " "
 
           # Set GitHub Action variable to be used in the next step
 
@@ -35,5 +37,4 @@ jobs:
 
       - name: Check env variable
         run: |
-          echo "SUCCESS_URLS=$ENV:SUCCESS_URLS"
-        
+          echo "SUCCESS_URLS=$SUCCESS_URLS"
