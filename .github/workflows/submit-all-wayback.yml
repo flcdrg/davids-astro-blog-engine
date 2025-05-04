@@ -1,0 +1,39 @@
+name: Links
+
+# This workflow can be triggered manually
+on:
+  workflow_dispatch:
+
+jobs:
+  generate_report:
+    runs-on: ubuntu-latest
+    name: Submit all Wayback Machine links
+
+    steps:
+      - name: Download Latest Artifact
+        uses: dawidd6/action-download-artifact@v9
+        with:
+          name: link-checker-results
+          workflow: main.yml
+          branch: main
+          path: ./artifacts
+          github_token: ${{ secrets.CREATE_PULLREQUEST_ACCESS_TOKEN }}
+          check_artifacts: true
+          search_artifacts: true
+          if_no_artifact_found: fail
+
+      - name: Filter JSON
+        run: |
+          $urls = ((get-content ./artifacts/output.json | ConvertFrom-Json).success_map.PSObject.properties.Value | 
+            Select-Object -ExpandProperty url | 
+            Sort-Object -Unique) -join " "
+
+          # Set GitHub Action variable to be used in the next step
+
+          echo "SUCCESS_URLS=$urls" >> "$env:GITHUB_ENV"
+        shell: pwsh
+
+      - name: Check env variable
+        run: |
+          echo "SUCCESS_URLS=$ENV:SUCCESS_URLS"
+        
