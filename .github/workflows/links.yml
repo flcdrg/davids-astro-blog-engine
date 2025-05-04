@@ -4,7 +4,7 @@ name: Links
 on:
   workflow_dispatch:
 
-permissions: write-all
+permissions: {}
 
 jobs:
   generate_report:
@@ -21,7 +21,7 @@ jobs:
           workflow: main.yml
           branch: main
           path: ./artifacts
-          github_token: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ secrets.CREATE_PULLREQUEST_ACCESS_TOKEN }}
           check_artifacts: true
           search_artifacts: true
           if_no_artifact_found: fail
@@ -89,3 +89,4 @@ jobs:
         uses: peter-evans/create-pull-request@v7.0.8
         with:
           title: "Fix broken links using archive.org snapshots"
+          token: ${{ secrets.CREATE_PULLREQUEST_ACCESS_TOKEN}}
