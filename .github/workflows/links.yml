@@ -4,9 +4,7 @@ name: Links
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write # Required for PR comments
+permissions: write-all
 
 jobs:
   generate_report:
@@ -15,18 +13,56 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Download Latest Artifact
         uses: dawidd6/action-download-artifact@v9
         with:
           name: link-checker-results
           workflow: main.yml
-          #branch: main
+          branch: main
           path: ./artifacts
           github_token: ${{secrets.GITHUB_TOKEN}}
           check_artifacts: true
           search_artifacts: true
           if_no_artifact_found: fail
+
+      - name: Filter JSON
+        run: |
+          $json = Get-Content -Path ./artifacts/output.json | ConvertFrom-Json
+
+          # Create a new error_map with only 404 errors
+          $filteredErrorMap = @{}
+
+          # Loop through each page in the error_map
+          foreach ($page in $json.error_map.PSObject.Properties) {
+              $pageName = $page.Name
+              $pageErrors = $page.Value
+              
+              # Filter the errors for this page to only include those with status code 404
+              $filteredErrors = $pageErrors | Where-Object { $_.status.code -eq 404 }
+              
+              # Only add the page to the filtered map if it has 404 errors
+              if ($filteredErrors -and $filteredErrors.Count -gt 0) {
+                  $filteredErrorMap[$pageName] = @($filteredErrors)
+              }
+          }
+
+          # Replace the original error_map with our filtered version
+
+          $json = @{
+              "error_map" = $filteredErrorMap
+          }
+
+          # Save the updated JSON back to the file
+          $json | ConvertTo-Json -Depth 10 | Set-Content -Path ./artifacts/output.json
+
+          Write-Host "Filtered error_map to only include status code 404 errors"
+        shell: pwsh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: modified
+          path: ./artifacts/output.json
 
       - name: Wayback Machine Query
         uses: flcdrg/wayback-machine-query-action@v4
@@ -43,7 +79,7 @@ jobs:
       - name: Replacements
         uses: flcdrg/replace-multiple-action@v2
         with:
-          files: "_posts/**/*.md"
+          files: "src/posts/**/*.md"
           find: ${{ steps.wayback.outputs.replacements }}
           prefix: '(^|\s+|\()'
           suffix: '($|\s+|\))'
