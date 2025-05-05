@@ -11,12 +11,9 @@ export default defineConfig({
   integrations: [sitemap({
     serialize(item) {
 
-      // ensure we have a trailing slash for directories
-      if (/\d{4}\/{0}/.test(item.url)) {
-        item.url += "/";
-      } else if (/tags\/{0}/.test(item.url)) {
-        item.url += "/";
-      }
+      // ensure we have no trailing slash for files
+      item.url = item.url.replace(/\/$/, '');
+      
       return item;
     }
   }), mdx()],
