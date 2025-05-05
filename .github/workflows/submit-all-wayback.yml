@@ -38,3 +38,27 @@ jobs:
       - name: Check env variable
         run: |
           echo "SUCCESS_URLS=$SUCCESS_URLS"
+
+      - name: Submit to Wayback Machine
+        run: |
+          # Submit all URLs to the Wayback Machine
+          $urls = $env:SUCCESS_URLS -split " "
+          $total = $urls.Count
+          $i = 0
+          foreach ($url in $urls) {
+            $i++
+
+            # Check if URL already exists in Wayback Machine
+            $urlExists = Invoke-RestMethod "https://archive.org/wayback/available?url=$url" -Method Get
+            if ($urlExists.archived_snapshots.psobject.properties.name -contains "closest" -and $urlExists.archived_snapshots.closest.available -eq $true) {
+              Write-Host "URL already exists in Wayback Machine: $url"
+              continue
+            }
+
+            Write-Host "Submitting $i/$total $url to Wayback Machine..."
+
+            $encodedUrl = [System.Web.HttpUtility]::UrlEncode($url)
+            $waybackUrl = "https://web.archive.org/save/$encodedUrl"
+            $response = Invoke-WebRequest -Uri $waybackUrl -Method Get
+          }
+        shell: pwsh
